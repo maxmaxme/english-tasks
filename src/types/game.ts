@@ -34,5 +34,5 @@ export type QuizQuestionAnswer = {
 export type InputQuestion = {
   question: string,
   hint: string,
-  answer: string,
+  answers: string[],
 }

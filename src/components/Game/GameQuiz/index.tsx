@@ -1,10 +1,11 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { QuizQuestion } from '../../../types/game';
 import { compareArrays, shuffle } from '../../../helpers/array';
 import styles from './styles.css';
 import { Button, Div, Group, Progress, SimpleCell, Title } from '@vkontakte/vkui';
 import cn from 'classnames';
 import { ListMarker } from '../../ListMarker';
+import { GameFinish } from '../GameFinish';
 
 type Props = {
   questions: QuizQuestion[],
@@ -18,15 +19,24 @@ export const shuffleQuestions = (questions: QuizQuestion[], limit: number) => sh
     return question;
   });
 
-export const GameQuiz = (props: Props) => {
-  const questions = useMemo(() => shuffleQuestions(props.questions, 5), [props.questions]);
-
+export const GameQuiz = ({ questions: originalQuestions, limit = 5 }: Props) => {
+  const [questions, setQuestions] = useState<QuizQuestion[]>([]);
   const [selectedAnswers, setSelectedAnswers] = useState<number[]>([]);
   const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
   const [step, setStep] = useState<'question' | 'answer'>('question');
   const [questionIndex, setQuestionIndex] = useState(0);
+
   const question: QuizQuestion | undefined = questions[questionIndex];
   const isMultiAnswer = question?.answers.filter((answer) => answer.correct).length > 1;
+
+  const initGame = () => {
+    setQuestions(shuffleQuestions(originalQuestions, limit));
+    setSelectedAnswers([]);
+    setCorrectAnswersCount(0);
+    setStep('question');
+    setQuestionIndex(0);
+  };
+  useEffect(initGame, [originalQuestions]);
 
   const onAnswerClick = (index: number) => {
     if (step !== 'question') {
@@ -65,11 +75,9 @@ export const GameQuiz = (props: Props) => {
   };
 
   if (!question) {
-    return (<>
-      <div>Done</div>
-      <div>Correct {correctAnswersCount}/{questions.length} answers</div>
-    </>
-    );
+    return <GameFinish correctCount={correctAnswersCount}
+      totalCount={questions.length}
+      againButtonOnClick={initGame} />;
   }
 
   return (<>
