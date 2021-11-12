@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Game as GameType, GAME_TYPES } from '../../types/game';
 import { GameQuiz } from './GameQuiz';
 import { GameInput } from './GameInput';
-import { Button, Div } from '@vkontakte/vkui';
+import { Button, Div, Separator } from '@vkontakte/vkui';
 import { GameHints } from './GameHints';
 
 type Props = {
@@ -18,6 +18,7 @@ export const Game = ({ game }: Props) => {
 
   return (<>
     {!started && (<>
+      <Separator />
       <GameHints hints={game.hints} />
       <Div>
         <Button stretched mode="secondary" onClick={startGame} size="l">Начать</Button>

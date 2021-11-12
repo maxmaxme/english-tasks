@@ -15,7 +15,7 @@ export const Game = ({ id }: {id: string}) => {
 
   return (
     <Panel id={id}>
-      <PanelHeader left={<PanelHeaderBack onClick={onBackClick} />}>{selectedGame?.name}</PanelHeader>
+      <PanelHeader separator={false} left={<PanelHeaderBack onClick={onBackClick} />}>{selectedGame?.name}</PanelHeader>
       {content}
     </Panel>
   );
