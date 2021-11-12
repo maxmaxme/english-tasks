@@ -1,0 +1,26 @@
+.question {
+  text-align: center;
+}
+
+.answerButtonContainer {
+  margin-bottom: 10px;
+  border-radius: 10px;
+  border: 2px dashed transparent;
+}
+
+.answerButtonContainer.answerButtonContainer--correct {
+  border-color: var(--button_commerce_background);
+}
+
+.answerButtonContainer.answerButtonContainer--incorrect {
+  border-color: var(--destructive);
+}
+
+.answerButtonContainer.answerButtonContainer--selected {
+  border-style: solid;
+}
+
+.answerButtons {
+  margin-top: 10px;
+}
+
