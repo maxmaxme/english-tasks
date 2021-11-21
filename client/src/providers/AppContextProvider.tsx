@@ -12,6 +12,8 @@ const AppContextProvider = ({ children }: {children: React.ReactNode}) => {
       resolveGamesList()
         .then((games) => dispatch({ type: Actions.SET_GAMES_LIST, payload: games }))
         .catch((e) => dispatch({ type: Actions.SET_GLOBAL_ERROR, payload: e.message })),
+      Promise.resolve('English tests')
+        .then((title) => document.title = title),
     ]).finally(() => {
       dispatch({ type: Actions.SET_IS_LOADING, payload: false });
     });
