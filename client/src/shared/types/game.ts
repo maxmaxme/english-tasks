@@ -1,6 +1,6 @@
 export type GameId = number;
 export type GameHint = {
-  title?: string,
+  title: string,
   content: string,
 }
 

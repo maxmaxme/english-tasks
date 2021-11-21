@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
-import { Game } from '../../shared/types/game';
+import { GameList } from '../../shared/types/game';
 import { AppContext } from '../../store/context';
 import { Actions } from '../../store/actions';
 import { SimpleCell } from '@vkontakte/vkui';
 
 type Props = {
-  game: Game,
+  game: GameList,
 }
 
 export const GamesListItem = ({ game }: Props) => {

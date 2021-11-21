@@ -40,6 +40,7 @@ const game: Game = {
 - если определение стоит **после** временного промежутка, то используется предлог __in__ (In the morning of his wedding)`,
     },
     {
+      title: 'last, next, this, every',
       content: `Мы не ставим никакие предлоги перед last, next, this, every.
 - last year, last Monday, next week, every day`,
     },
