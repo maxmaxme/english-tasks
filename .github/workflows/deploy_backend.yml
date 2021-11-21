@@ -30,4 +30,4 @@ jobs:
       - name: Build
         run: npm run build
       - name: Deploy
-        run: rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --exclude '.env.local' --archive --compress --delete -a node_modules build/ ${{ secrets.DEPLOY_PATH }}
+        run: rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --exclude '.env.local' --archive --compress --delete -a node_modules build/ "${{ secrets.DEPLOY_PATH }}"
