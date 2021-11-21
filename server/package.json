@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/app.ts",
   "scripts": {
-    "start": "PORT=3001 HTTPS=true NODE_ENV=development ts-node-dev --inspect --respawn src/app.ts",
+    "start": "PORT=3002 HTTPS=true NODE_ENV=development ts-node-dev --inspect --respawn src/app.ts",
     "pm2": "PORT=1111 NODE_ENV=production pm2 start build/app.js --name=test --watch -i max",
     "prod": "NODE_ENV=production node build/app.js",
     "build": "rimraf build && tsc -p tsconfig.json",
