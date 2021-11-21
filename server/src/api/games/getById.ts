@@ -12,7 +12,7 @@ export default (params: Params): Promise<Game> => {
     id: { required: true, regexp: regexp.gameId, castTo: 'number' },
   });
   return getGames()
-    .then((games) => games.find((game) => game.id === gameId))
+    .then((games) => games[gameId])
     .then((game) => {
       if (!game) {
         throw new Error('Game not found');

@@ -1,8 +1,9 @@
-import { Game, GameId } from './game';
+import { Game, GameId, GameList } from './game';
 
 export type AppContext<T> = {
   state: {
-    gamesList: Game[],
+    gamesList: GameList[],
+    games: {[key: GameId]: Game},
     isLoading: boolean,
     globalError: undefined | string,
     selectedGameId: undefined | GameId,

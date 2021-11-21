@@ -9,6 +9,14 @@ export const reducer = (state: AppContextType<Dispatch<Action>>['state'], action
       ...state,
       gamesList: action.payload,
     };
+  case Actions.APPEND_GAMES:
+    return {
+      ...state,
+      games: {
+        ...state.games,
+        ...action.payload,
+      },
+    };
   case Actions.SET_IS_LOADING:
     return {
       ...state,
