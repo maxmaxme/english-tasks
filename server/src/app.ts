@@ -20,10 +20,11 @@ const port = process.env.PORT || 3003;
 
 const env = process.env.NODE_ENV || 'development';
 const staticPath = env === 'production' ? '../public' : '../client/build';
+const subFolder = env === 'production' ? '/english-tasks' : '';
 app.use(express.static(path.join(__dirname, staticPath)));
 app.use(cors());
 
-app.get('/english-tasks/api/*', (req: Request<{ 0?: string }>, res) => {
+app.get(subFolder + '/api/*', (req: Request<{ 0?: string }>, res) => {
   const fullMethod = req.params[0] || ''; // apps.get
   const [methodName, methodSubname] = fullMethod.split('.');
 
