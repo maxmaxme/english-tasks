@@ -38,10 +38,7 @@ app.get(subFolder + '/api/*', (req: Request<{ 0?: string }>, res) => {
   const privateSubMethod = privateMethod ? privateMethod[methodSubname] : undefined;
   if (!publicSubMethod && !privateSubMethod) {
     return res.json({
-      error: {
-        code: 1,
-        message: 'Unknown method ' + fullMethod,
-      },
+      error: new ApiError(ApiErrors.UNKNOWN_METHOD).toObject(),
     });
   }
   try {
@@ -72,19 +69,13 @@ app.get(subFolder + '/api/*', (req: Request<{ 0?: string }>, res) => {
       })
       .catch((error: {message: string}) => {
         return res.json({
-          error: {
-            code: ApiErrors.UNKNOWN_ERROR,
-            message: error.message,
-          },
+          error: new ApiError(ApiErrors.UNKNOWN_ERROR, error.message).toObject(),
         });
       });
   } catch (e: any) {
     console.error(e);
     return res.json({
-      error: {
-        code: e.code || ApiErrors.UNKNOWN_ERROR,
-        message: e.message || 'Unknown api error',
-      },
+      error: new ApiError(ApiErrors.UNKNOWN_ERROR, e.message || 'Unknown api error').toObject(),
     });
   }
 });

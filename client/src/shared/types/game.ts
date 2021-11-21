@@ -13,6 +13,12 @@ export type Game = {
   inputQuestions?: InputQuestion[],
 }
 
+export type GameList = {
+  id: GameId,
+  name: string,
+  type: GameTypes,
+}
+
 export const GAME_TYPES = {
   QUIZ: 'quiz',
   INPUT: 'input',
