@@ -1,4 +1,4 @@
-import { Game, GAME_TYPES } from '../types/game';
+import { Game, GAME_TYPES } from '../../../client/src/types/game';
 
 const irregularVerbs2: [string, string[], string[], string][] = [
   ['arise', ['arose'], ['arisen'], 'подниматься'],
