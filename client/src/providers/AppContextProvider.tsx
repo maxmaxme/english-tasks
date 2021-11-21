@@ -2,16 +2,18 @@ import React, { useEffect, useReducer } from 'react';
 import { AppContext, AppContextInitialValue } from '../store/context';
 import { reducer } from '../store/reducer';
 import { Actions } from '../store/actions';
-import { resolveGames } from '../resolvers/resolveGames';
+import { resolveGamesList } from '../resolvers/resolveGames';
 
 const AppContextProvider = ({ children }: {children: React.ReactNode}) => {
   const [state, dispatch] = useReducer(reducer, AppContextInitialValue);
 
   useEffect(() => {
     Promise.all([
-      resolveGames()
+      resolveGamesList()
         .then((games) => dispatch({ type: Actions.SET_GAMES_LIST, payload: games }))
         .catch((e) => dispatch({ type: Actions.SET_GLOBAL_ERROR, payload: e.message })),
+      Promise.resolve('English tests')
+        .then((title) => document.title = title),
     ]).finally(() => {
       dispatch({ type: Actions.SET_IS_LOADING, payload: false });
     });

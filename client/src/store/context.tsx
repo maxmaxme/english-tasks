@@ -4,6 +4,7 @@ import { Action } from './actions';
 
 export const AppContextInitialValue = {
   gamesList: [],
+  games: {},
   isLoading: true,
   globalError: undefined,
   selectedGameId: undefined,

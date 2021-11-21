@@ -6,7 +6,11 @@ import { AppearanceScheme } from '@vkontakte/vkui/dist/components/ConfigProvider
 const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
   const platform = usePlatform();
 
-  const [scheme, setScheme] = useState<AppearanceScheme>('bright_light');
+  const isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const [scheme, setScheme] = useState<AppearanceScheme>(isDark ? 'space_gray' : 'client_light');
+  // window.matchMedia('(prefers-color-scheme: dark)').addListener(function(e) {
+  //   setScheme(e.matches ? 'space_gray' : 'client_light');
+  // });
   useEffect(() => {
     bridge.subscribe(({ detail: { type, data } }) => {
       if (type === 'VKWebAppUpdateConfig') {
