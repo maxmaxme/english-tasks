@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Game } from '../../types/game';
+import { Game } from '../../shared/types/game';
 import { AppContext } from '../../store/context';
 import { Actions } from '../../store/actions';
 import { SimpleCell } from '@vkontakte/vkui';

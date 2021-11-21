@@ -1,6 +1,6 @@
 import { ParsedQs } from 'qs';
 import gamesGet from './games/get';
-import { UserId } from '../../../client/src/types/user';
+import { UserId } from '../shared/types/user';
 
 export const privateMethods: { [key: string]: { [key: string]: (userId: UserId, query: ParsedQs) => Promise<any> } } = {
 

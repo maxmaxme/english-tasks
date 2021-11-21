@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { UserId } from '../../../client/src/types/user';
+import { UserId } from '../shared/types/user';
 
 export const getAccessToken = (data: { id: UserId }): string => {
   return jwt.sign(data, process.env.ACCESS_TOKEN_SALT || '', {});

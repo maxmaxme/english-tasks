@@ -1,4 +1,4 @@
-import { Game, GameId } from '../types/game';
+import { Game, GameId } from '../shared/types/game';
 
 export enum Actions {
   // eslint-disable-next-line no-unused-vars

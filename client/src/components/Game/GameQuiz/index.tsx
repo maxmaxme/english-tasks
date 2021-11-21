@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { QuizQuestion } from '../../../types/game';
+import { QuizQuestion } from '../../../shared/types/game';
 import { compareArrays, shuffle } from '../../../helpers/array';
 import styles from './styles.css';
 import { Button, Div, Group, Progress, SimpleCell, Title } from '@vkontakte/vkui';

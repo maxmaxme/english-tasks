@@ -1,5 +1,5 @@
 import { Dispatch } from 'react';
-import { AppContext as AppContextType } from '../types/context';
+import { AppContext as AppContextType } from '../shared/types/context';
 import { Action, Actions } from './actions';
 
 export const reducer = (state: AppContextType<Dispatch<Action>>['state'], action: Action): AppContextType<Dispatch<Action>>['state'] => {

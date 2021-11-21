@@ -1,5 +1,5 @@
 import { createContext, Dispatch } from 'react';
-import { AppContext as AppContextType } from '../types/context';
+import { AppContext as AppContextType } from '../shared/types/context';
 import { Action } from './actions';
 
 export const AppContextInitialValue = {

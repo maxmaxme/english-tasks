@@ -1,7 +1,6 @@
 import atOnIn from '../../games/atOnIn';
 import { pastSimple, v3 } from '../../games/irregularVerbs';
-
-import { Game } from '../../../../client/src/types/game';
+import { Game } from '../../shared/types/game';
 
 export const getGames = (): Promise<Game[]> => {
   return Promise.resolve([

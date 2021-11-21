@@ -1,4 +1,4 @@
-import { Game, GAME_TYPES } from '../../../client/src/types/game';
+import { Game, GAME_TYPES } from '../shared/types/game';
 
 const game: Game = {
   id: NaN,

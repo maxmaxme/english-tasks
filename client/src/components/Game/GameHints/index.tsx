@@ -1,7 +1,7 @@
 import React from 'react';
 import { CardGrid, ContentCard } from '@vkontakte/vkui';
 import ReactMarkdown from 'react-markdown';
-import { GameHint } from '../../../types/game';
+import { GameHint } from '../../../shared/types/game';
 import styles from './index.css';
 
 export const GameHints = ({ hints }: {hints: GameHint[]}) => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Game } from '../../types/game';
+import { Game } from '../../shared/types/game';
 import { GamesListItem } from '../GamesListItem';
 import { Group, Header } from '@vkontakte/vkui';
 

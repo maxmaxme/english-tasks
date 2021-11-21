@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Game as GameType, GAME_TYPES } from '../../types/game';
+import { Game as GameType, GAME_TYPES } from '../../shared/types/game';
 import { GameQuiz } from './GameQuiz';
 import { GameInput } from './GameInput';
 import { Button, Div, Separator } from '@vkontakte/vkui';

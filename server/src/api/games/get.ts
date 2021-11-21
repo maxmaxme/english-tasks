@@ -1,4 +1,4 @@
-import { Game } from '../../../../client/src/types/game';
+import { Game } from '../../shared/types/game';
 import { getGames } from '../../methods/games/get';
 
 export default (): Promise<Game[]> => {

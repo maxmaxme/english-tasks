@@ -1,5 +1,5 @@
 import Cookies from 'universal-cookie';
-import { ApiErrors } from '../types/error';
+import { ApiErrors } from '../shared/types/error';
 
 export const callApi = (method: string, params: {[key: string]: string | number} = {}) => {
   const cookies = new Cookies();

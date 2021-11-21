@@ -12,7 +12,7 @@ import express, { Request } from 'express';
 import * as path from 'path';
 import { decodeAccessToken } from './helpers/hash';
 import { privateMethods, publicMethods } from './api';
-import { ApiError, ApiErrors } from '../../client/src/types/error';
+import { ApiError, ApiErrors } from './shared/types/error';
 
 const app = express();
 const port = process.env.PORT || 3003;

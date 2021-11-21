@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { InputQuestion } from '../../../types/game';
+import { InputQuestion } from '../../../shared/types/game';
 import { shuffle } from '../../../helpers/array';
 import styles from './styles.css';
 import { Button, Div, FormItem, FormLayout, Input, Progress, Title } from '@vkontakte/vkui';
