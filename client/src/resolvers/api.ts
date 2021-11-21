@@ -12,7 +12,7 @@ export const callApi = (method: string, params: {[key: string]: string | number}
     return encodeURIComponent(key) + '=' + encodeURIComponent(params[key]);
   }).join('&');
 
-  return fetch(`/api/${method}?${urlParams}`)
+  return fetch(process.env.API_SERVER + `/api/${method}?${urlParams}`)
     .then((response) => response.json())
     .then((response) => {
       if (response.response) {

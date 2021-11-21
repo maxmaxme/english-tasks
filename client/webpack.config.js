@@ -3,6 +3,7 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const getScopedName = require('./src/helpers/getScopedName');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = (env, options) => {
   const isDev = options.mode === 'development';
@@ -60,6 +61,9 @@ module.exports = (env, options) => {
     plugins: [
       new HtmlWebPackPlugin({
         template: './src/index.html',
+      }),
+      new Dotenv({
+        path: isDev ? './.env.development' : './.env.production',
       }),
       ...(isDev ? [] : [
         new CleanWebpackPlugin(),

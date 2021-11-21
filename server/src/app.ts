@@ -8,6 +8,7 @@ dotenv.config({
   path: fs.existsSync(envPath.local) ? envPath.local : envPath.global,
 });
 
+import cors from 'cors';
 import express, { Request } from 'express';
 import * as path from 'path';
 import { decodeAccessToken } from './helpers/hash';
@@ -20,6 +21,7 @@ const port = process.env.PORT || 3003;
 const env = process.env.NODE_ENV || 'development';
 const staticPath = env === 'production' ? '../public' : '../client/build';
 app.use(express.static(path.join(__dirname, staticPath)));
+app.use(cors());
 
 app.get('/api/*', (req: Request<{ 0?: string }>, res) => {
   const fullMethod = req.params[0] || ''; // apps.get
