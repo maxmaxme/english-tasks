@@ -10,8 +10,7 @@
     "build": "rimraf build && tsc -p tsconfig.json",
     "eslint": "eslint --ext .tsx --ext .ts .",
     "jest": "jest",
-    "test": "npm run jest && npm run eslint",
-    "deploy": "rsync --exclude '.env.local' --archive --compress --delete -a node_modules build/ root@langs.maxmax.me:/var/www/www-root/data/www/api.maxmax.me/english-tasks"
+    "test": "npm run jest && npm run eslint"
   },
   "dependencies": {
     "cors": "^2.8.5",
