@@ -13,11 +13,7 @@ type Props = {
 }
 
 export const shuffleQuestions = (questions: QuizQuestion[], limit: number) => shuffle([...questions])
-  .slice(0, limit)
-  .map((question) => {
-    question.answers = shuffle(question.answers);
-    return question;
-  });
+  .slice(0, limit);
 
 export const GameQuiz = ({ questions: originalQuestions, limit = 5 }: Props) => {
   const [questions, setQuestions] = useState<QuizQuestion[]>([]);

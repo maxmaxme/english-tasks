@@ -5,6 +5,7 @@
   "scripts": {
     "start": "webpack-dev-server --mode=development --open --hot",
     "build": "webpack --mode=production",
+    "eslint": "eslint --ext .tsx --ext .ts src/",
     "deploy": "vk-miniapps-deploy",
     "test": "jest"
   },
