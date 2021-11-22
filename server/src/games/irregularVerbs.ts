@@ -126,18 +126,20 @@ export const pastSimple: Game = {
   id: NaN,
   name: 'Past simple (irregular verbs)',
   hints: [
-    { title: 'В чём суть?', content: 'Будут предложены глаголы Infinitive. Нужно в поле ввода ввести глагол в Past Simple' },
+    { open: true, title: 'В чём суть?', content: 'Будут предложены глаголы Infinitive. Нужно в поле ввода ввести глагол в Past Simple' },
   ],
   type: GAME_TYPES.INPUT,
   inputQuestions: irregularVerbs2.map(([question, answers, , hint]) => ({ question, answers, hint })),
+  questionsLimit: 10,
 };
 
 export const v3: Game = {
   id: NaN,
   name: 'Participle II (V3)',
   hints: [
-    { title: 'В чём суть?', content: 'Будут предложены глаголы Infinitive. Нужно в поле ввода ввести глагол для времён группы Perfect' },
+    { open: true, title: 'В чём суть?', content: 'Будут предложены глаголы Infinitive. Нужно в поле ввода ввести глагол для времён группы Perfect' },
   ],
   type: GAME_TYPES.INPUT,
   inputQuestions: irregularVerbs2.map(([question, , answers, hint]) => ({ question, answers, hint })),
+  questionsLimit: 10,
 };
