@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { InputQuestion } from '../../../shared/types/game';
 import { shuffle } from '../../../helpers/array';
 import styles from './styles.css';
-import { Button, Div, FormItem, FormLayout, Input, Progress, Title } from '@vkontakte/vkui';
+import { Button, Div, FormItem, FormLayout, Input, PanelSpinner, Progress, Title } from '@vkontakte/vkui';
 import { FormItemProps } from '@vkontakte/vkui/src/components/FormItem/FormItem';
 import { GameFinish } from '../GameFinish';
 
@@ -11,10 +11,11 @@ type Props = {
   limit?: number
 }
 
-export const shuffleQuestions = (questions: InputQuestion[], limit: number) => shuffle([...questions])
-  .slice(0, limit);
+export const shuffleQuestions = (questions: InputQuestion[], limit: number) =>
+  Promise.resolve(shuffle([...questions]).slice(0, limit));
 
 export const GameInput = ({ questions: originalQuestions, limit = 10 }: Props) => {
+  const [isLoading, setIsLoading] = useState(true);
   const [questions, setQuestions] = useState<InputQuestion[]>([]);
   const [value, setValue] = useState('');
   const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
@@ -25,11 +26,16 @@ export const GameInput = ({ questions: originalQuestions, limit = 10 }: Props) =
   const isCorrect = question?.answers.includes(value.trim());
 
   const initGame = () => {
-    setQuestions(shuffleQuestions(originalQuestions, limit));
-    setValue('');
-    setCorrectAnswersCount(0);
-    setStep('question');
-    setQuestionIndex(0);
+    setIsLoading(true);
+    shuffleQuestions(originalQuestions, limit)
+      .then((questions) => {
+        setQuestions(questions);
+        setValue('');
+        setCorrectAnswersCount(0);
+        setStep('question');
+        setQuestionIndex(0);
+        setIsLoading(false);
+      });
   };
   useEffect(initGame, [originalQuestions]);
 
@@ -47,6 +53,10 @@ export const GameInput = ({ questions: originalQuestions, limit = 10 }: Props) =
     setValue('');
   };
 
+  if (isLoading) {
+    return <PanelSpinner />;
+  }
+
   if (!question) {
     return <GameFinish
       correctCount={correctAnswersCount}
@@ -61,10 +71,15 @@ export const GameInput = ({ questions: originalQuestions, limit = 10 }: Props) =
     return 'default';
   };
 
+  let hint = null;
+  if (question.hint) {
+    hint = ` (${question.hint})`;
+  }
+
   return (<>
     <Progress value={questionIndex/questions.length * 100} />
     <Div>
-      <Title level="1" weight="regular" className={styles.question}>{question.question} ({question.hint})</Title>
+      <Title level="1" weight="regular" className={styles.question}>{question.question}{hint}</Title>
     </Div>
     {(step === 'answer' && !isCorrect) && <Div>{question.answers.join(' / ')}</Div>}
 

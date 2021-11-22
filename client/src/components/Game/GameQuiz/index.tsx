@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { QuizQuestion } from '../../../shared/types/game';
 import { compareArrays, shuffle } from '../../../helpers/array';
 import styles from './styles.css';
-import { Button, Div, Group, Progress, SimpleCell, Title } from '@vkontakte/vkui';
+import { Button, Div, Group, PanelSpinner, Progress, SimpleCell, Title } from '@vkontakte/vkui';
 import cn from 'classnames';
 import { ListMarker } from '../../ListMarker';
 import { GameFinish } from '../GameFinish';
@@ -12,10 +12,11 @@ type Props = {
   limit?: number
 }
 
-export const shuffleQuestions = (questions: QuizQuestion[], limit: number) => shuffle([...questions])
-  .slice(0, limit);
+export const shuffleQuestions = (questions: QuizQuestion[], limit: number) =>
+  Promise.resolve(shuffle([...questions]).slice(0, limit));
 
-export const GameQuiz = ({ questions: originalQuestions, limit = 5 }: Props) => {
+export const GameQuiz = ({ questions: originalQuestions, limit = 10 }: Props) => {
+  const [isLoading, setIsLoading] = useState(true);
   const [questions, setQuestions] = useState<QuizQuestion[]>([]);
   const [selectedAnswers, setSelectedAnswers] = useState<number[]>([]);
   const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
@@ -26,11 +27,16 @@ export const GameQuiz = ({ questions: originalQuestions, limit = 5 }: Props) => 
   const isMultiAnswer = question?.answers.filter((answer) => answer.correct).length > 1;
 
   const initGame = () => {
-    setQuestions(shuffleQuestions(originalQuestions, limit));
-    setSelectedAnswers([]);
-    setCorrectAnswersCount(0);
-    setStep('question');
-    setQuestionIndex(0);
+    setIsLoading(true);
+    shuffleQuestions(originalQuestions, limit)
+      .then((questions) => {
+        setQuestions(questions);
+        setSelectedAnswers([]);
+        setCorrectAnswersCount(0);
+        setStep('question');
+        setQuestionIndex(0);
+        setIsLoading(false);
+      });
   };
   useEffect(initGame, [originalQuestions]);
 
@@ -69,6 +75,10 @@ export const GameQuiz = ({ questions: originalQuestions, limit = 5 }: Props) => 
     setQuestionIndex(questionIndex + 1);
     setSelectedAnswers([]);
   };
+
+  if (isLoading) {
+    return <PanelSpinner />;
+  }
 
   if (!question) {
     return <GameFinish correctCount={correctAnswersCount}

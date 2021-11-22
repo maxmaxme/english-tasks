@@ -2,6 +2,7 @@ export type GameId = number;
 export type GameHint = {
   title: string,
   content: string,
+  open?: boolean,
 }
 
 export type Game = {
@@ -11,6 +12,7 @@ export type Game = {
   type: GameTypes,
   quizQuestions?: QuizQuestion[],
   inputQuestions?: InputQuestion[],
+  questionsLimit: number,
 }
 
 export type GameList = {
@@ -39,6 +41,6 @@ export type QuizQuestionAnswer = {
 
 export type InputQuestion = {
   question: string,
-  hint: string,
+  hint?: string,
   answers: string[],
 }

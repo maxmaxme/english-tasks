@@ -16,19 +16,20 @@ export const Game = ({ game }: Props) => {
     setStarted(true);
   };
 
-  return (<>
-    {!started && (<>
-      <Separator />
-      <GameHints hints={game.hints} />
-      <Div>
-        <Button stretched mode="secondary" onClick={startGame} size="l">Начать</Button>
-      </Div>
-    </>)}
-    {started && (
+  if (!started) {
+    return (
       <>
-        {game.type === GAME_TYPES.QUIZ && <GameQuiz questions={game.quizQuestions!} />}
-        {game.type === GAME_TYPES.INPUT && <GameInput questions={game.inputQuestions!} />}
+        <Separator />
+        <GameHints hints={game.hints} />
+        <Div>
+          <Button stretched mode="secondary" onClick={startGame} size="l">Начать</Button>
+        </Div>
       </>
-    )}
+    );
+  }
+
+  return (<>
+    {game.type === GAME_TYPES.QUIZ && <GameQuiz questions={game.quizQuestions!} limit={game.questionsLimit} />}
+    {game.type === GAME_TYPES.INPUT && <GameInput questions={game.inputQuestions!} limit={game.questionsLimit} />}
   </>);
 };

@@ -82,6 +82,7 @@ const game: Game = {
     { question: '... every month', ...answer('ничего') },
     { question: '... this day', ...answer('ничего') },
   ],
+  questionsLimit: 5,
 };
 
 export default game;

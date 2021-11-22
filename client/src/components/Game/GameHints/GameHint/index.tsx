@@ -7,15 +7,15 @@ import { GameHint as GameHintType } from '../../../../shared/types/game';
 import styles from './index.css';
 
 export const GameHint = ({ hint }: { hint: GameHintType }) => {
-  const [collapsed, setCollapsed] = useState(true);
+  const [open, setOpen] = useState(hint.open || false);
   return (<ContentCard
     header={<div className={styles.title}>
       <div className={cn(styles.titleIcon, {
-        [styles['titleIcon--rotated']]: collapsed,
+        [styles['titleIcon--rotated']]: !open,
       })}><Icon16ChevronOutline /></div>
       <div className={styles.titleText}>{hint.title}</div>
     </div>}
-    onClick={() => setCollapsed((prevValue) => !prevValue)}
-    caption={collapsed ? undefined : <ReactMarkdown className={styles.content}>{hint.content}</ReactMarkdown>}
+    onClick={() => setOpen((prevValue) => !prevValue)}
+    caption={!open ? undefined : <ReactMarkdown className={styles.content}>{hint.content}</ReactMarkdown>}
   />);
 };
