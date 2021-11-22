@@ -8,7 +8,6 @@ import AppConfigProvider from './providers/AppConfigProvider';
 import '@vkontakte/vkui/dist/vkui.css';
 import './index.css';
 
-bridge.send('VKWebAppInit', {});
 render(
   <AppContextProvider>
     <AppConfigProvider>

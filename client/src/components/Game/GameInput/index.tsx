@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { InputQuestion } from '../../../shared/types/game';
-import { shuffle } from '../../../helpers/array';
+import { shuffle } from '../../../shared/helpers/array';
 import styles from './styles.css';
 import { Button, Div, FormItem, FormLayout, Input, PanelSpinner, Progress, Title } from '@vkontakte/vkui';
 import { FormItemProps } from '@vkontakte/vkui/src/components/FormItem/FormItem';

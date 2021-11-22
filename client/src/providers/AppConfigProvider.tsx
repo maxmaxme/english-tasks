@@ -5,21 +5,32 @@ import { AppearanceScheme } from '@vkontakte/vkui/dist/components/ConfigProvider
 
 const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
   const platform = usePlatform();
+  const lights = ['bright_light', 'client_light', 'vkcom_light'];
 
-  const [scheme, setScheme] = useState<AppearanceScheme>('client_light');
+  const [scheme, setScheme] = useState<AppearanceScheme>('bright_light');
+
   useEffect(() => {
-    bridge.subscribe(({ detail: { type, data } }) => {
-      if (type === 'VKWebAppUpdateConfig') {
-        // @ts-ignore
-        const scheme = data.scheme;
-        const isLight = ['bright_light', 'client_light'].includes(scheme);
-        setScheme(isLight ? 'bright_light' : 'space_gray');
+    function changeScheme(scheme: string) {
+      const isLight = lights.includes(scheme);
+      setScheme(isLight ? 'bright_light' : 'space_gray');
+
+      if (bridge.supports('VKWebAppSetViewSettings')) {
         bridge.send('VKWebAppSetViewSettings', {
           'status_bar_style': isLight ? 'dark' : 'light',
-          'action_bar_color': isLight ? '#000' : '#FFF',
+          'action_bar_color': isLight ? '#ffffff' : '#191919',
         });
       }
+    }
+
+    bridge.subscribe(({ detail: { type, data } }) => {
+      console.log({ type, data });
+      if (type === 'VKWebAppUpdateConfig') {
+        // @ts-ignore
+        changeScheme(data.scheme);
+      }
     });
+
+    bridge.send('VKWebAppInit');
   }, []);
 
   return (

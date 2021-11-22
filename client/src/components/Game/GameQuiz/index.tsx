@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { QuizQuestion } from '../../../shared/types/game';
-import { compareArrays, shuffle } from '../../../helpers/array';
+import { compareArrays, shuffle } from '../../../shared/helpers/array';
 import styles from './styles.css';
 import { Button, Div, Group, PanelSpinner, Progress, SimpleCell, Title } from '@vkontakte/vkui';
 import cn from 'classnames';
