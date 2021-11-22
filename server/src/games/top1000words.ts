@@ -1,5 +1,5 @@
-import { Game, GAME_TYPES } from '../../../client/src/shared/types/game';
-import { shuffle } from '../../../client/src/helpers/array';
+import { Game, GAME_TYPES } from '../shared/types/game';
+import { shuffle } from '../shared/helpers/array';
 
 const data = [
   // ["the", "артикль"],
