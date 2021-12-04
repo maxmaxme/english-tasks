@@ -1,5 +1,12 @@
 import fs from 'fs';
 import dotenv from 'dotenv';
+import cors from 'cors';
+import express, { Request } from 'express';
+import * as path from 'path';
+import { decodeAccessToken } from './helpers/hash';
+import { privateMethods, publicMethods } from './api';
+import { ApiError, ApiErrors } from './shared/types/error';
+
 const envPath = {
   local: '.env.local',
   global: '.env',
@@ -7,13 +14,6 @@ const envPath = {
 dotenv.config({
   path: fs.existsSync(envPath.local) ? envPath.local : envPath.global,
 });
-
-import cors from 'cors';
-import express, { Request } from 'express';
-import * as path from 'path';
-import { decodeAccessToken } from './helpers/hash';
-import { privateMethods, publicMethods } from './api';
-import { ApiError, ApiErrors } from './shared/types/error';
 
 const app = express();
 const port = process.env.PORT || 3003;
