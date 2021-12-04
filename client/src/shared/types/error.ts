@@ -1,7 +1,11 @@
 export enum ApiErrors {
+  // eslint-disable-next-line no-unused-vars
   UNKNOWN_ERROR,
+  // eslint-disable-next-line no-unused-vars
   INVALID_ACCESS_TOKEN,
+  // eslint-disable-next-line no-unused-vars
   METHOD_ERROR,
+  // eslint-disable-next-line no-unused-vars
   UNKNOWN_METHOD,
 }
 
