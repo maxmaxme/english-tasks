@@ -4,7 +4,7 @@ import { get as cacheGet, set as cacheSet } from '../store/cache';
 import { getGameCacheKey, KEYS } from '../shared/types/cache';
 
 export const resolveGamesList = (onLoad: (gameList: GameList[]) => void) => {
-  onLoad(cacheGet(KEYS.GAMES_LIST, {}));
+  onLoad(cacheGet(KEYS.GAMES_LIST, []));
   callApi('games.getList')
     .then((list) => {
       cacheSet(KEYS.GAMES_LIST, list);
