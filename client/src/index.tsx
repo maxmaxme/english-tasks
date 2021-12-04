@@ -1,7 +1,6 @@
 import { AdaptivityProvider } from '@vkontakte/vkui';
 import React from 'react';
 import { render } from 'react-dom';
-import bridge from '@vkontakte/vk-bridge';
 import { App } from './components/App';
 import AppContextProvider from './providers/AppContextProvider';
 import AppConfigProvider from './providers/AppConfigProvider';
