@@ -23,7 +23,6 @@ const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
     }
 
     bridge.subscribe(({ detail: { type, data } }) => {
-      console.log({ type, data });
       if (type === 'VKWebAppUpdateConfig') {
         // @ts-ignore
         changeScheme(data.scheme);

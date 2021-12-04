@@ -8,7 +8,7 @@ type Props = {
 }
 
 export const ListMarker = ({ children, selected }: Props) => {
-  return <div className={cn(styles.root, {
+  return <div aria-hidden className={cn(styles.root, {
     [styles['root--selected']]: selected,
   })}>{children}</div>;
 };

@@ -89,9 +89,13 @@ export const GameQuiz = ({ questions: originalQuestions, limit = 10 }: Props) =>
   return (<>
     <Progress value={questionIndex/questions.length * 100} />
     <Div>
-      <Title level="1" weight="regular" className={styles.question}>{question.question}</Title>
+      <Title
+        aria-label={'При' + question.question + ' нужно ставить:'}
+        level="1" weight="regular"
+        className={styles.question}
+      >{question.question}</Title>
 
-      <Group className={styles.answerButtons}>
+      <Group aria-label="Варианты ответа" className={styles.answerButtons}>
         {question.answers.map((answer, i) => (
           <div className={cn(styles.answerButtonContainer, {
             [styles['answerButtonContainer--correct']]: step === 'answer' && answer.correct,
@@ -99,6 +103,7 @@ export const GameQuiz = ({ questions: originalQuestions, limit = 10 }: Props) =>
             [styles['answerButtonContainer--selected']]: step === 'answer' && selectedAnswers.includes(i),
           })} key={i}>
             <SimpleCell
+              aria-label={'Вариант: ' + answer.text}
               before={<ListMarker selected={selectedAnswers.includes(i)}>{i + 1}</ListMarker>}
               disabled={step !== 'question'}
               onClick={onAnswerClick(i)}

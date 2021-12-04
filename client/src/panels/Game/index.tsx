@@ -8,20 +8,22 @@ import { resolveGameById } from '../../resolvers/resolveGames';
 export const Game = ({ id: panelId }: {id: string}) => {
   const onBackClick = () => dispatch({ type: Actions.SET_SELECTED_GAME_ID, payload: undefined });
 
-  const { state: { selectedGameId, games }, dispatch } = useContext(AppContext);
+  const { state: { selectedGameId, games, gamesList }, dispatch } = useContext(AppContext);
   const [isLoading, setIsLoading] = useState(false);
   const selectedGame = selectedGameId ? games[selectedGameId] : undefined;
+  const selectedGameVersion = gamesList.find(({ id }) => id === selectedGameId)?.version || 1;
 
   useEffect(() => {
     if (!selectedGame && selectedGameId && !isLoading) {
       setIsLoading(true);
-      resolveGameById(selectedGameId)
+      resolveGameById(selectedGameId, selectedGameVersion)
         .then((game) => {
           dispatch({ type: Actions.APPEND_GAMES, payload: {
             [game.id]: game,
           } });
           setIsLoading(false);
-        });
+        })
+        .catch((e) => dispatch({ type: Actions.SET_GLOBAL_ERROR, payload: e.message }));
     }
   }, [selectedGameId]);
 

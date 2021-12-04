@@ -17,11 +17,6 @@ export const reducer = (state: AppContextType<Dispatch<Action>>['state'], action
         ...action.payload,
       },
     };
-  case Actions.SET_IS_LOADING:
-    return {
-      ...state,
-      isLoading: action.payload,
-    };
   case Actions.SET_GLOBAL_ERROR:
     return {
       ...state,
