@@ -1,23 +1,32 @@
 import React, { useEffect, useReducer } from 'react';
 import { AppContext, AppContextInitialValue } from '../store/context';
 import { reducer } from '../store/reducer';
-import { Actions } from '../store/actions';
 import { resolveGamesList } from '../resolvers/resolveGames';
+import { Actions } from '../store/actions';
 
 const AppContextProvider = ({ children }: {children: React.ReactNode}) => {
   const [state, dispatch] = useReducer(reducer, AppContextInitialValue);
 
   useEffect(() => {
-    Promise.all([
-      resolveGamesList()
-        .then((games) => dispatch({ type: Actions.SET_GAMES_LIST, payload: games }))
-        .catch((e) => dispatch({ type: Actions.SET_GLOBAL_ERROR, payload: e.message })),
-      Promise.resolve('English tests')
-        .then((title) => document.title = title),
-    ]).finally(() => {
-      dispatch({ type: Actions.SET_IS_LOADING, payload: false });
+    resolveGamesList((list) => {
+      dispatch({ type: Actions.SET_GAMES_LIST, payload: list });
     });
   }, []);
+
+  useEffect(() => {
+    const { selectedGameId, games } = state;
+    console.log(selectedGameId);
+    let title = 'English tests';
+    if (selectedGameId) {
+      const selectedGame = selectedGameId ? games[selectedGameId] : undefined;
+      if (selectedGame) {
+        title = selectedGame.name;
+      } else {
+        title = 'Loading...';
+      }
+    }
+    document.title = title;
+  }, [state.selectedGameId, state.games]);
 
   return (
     <AppContext.Provider value={{ state, dispatch }}>

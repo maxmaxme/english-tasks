@@ -21,7 +21,8 @@ export const Game = ({ id: panelId }: {id: string}) => {
             [game.id]: game,
           } });
           setIsLoading(false);
-        });
+        })
+        .catch((e) => dispatch({ type: Actions.SET_GLOBAL_ERROR, payload: e.message }));
     }
   }, [selectedGameId]);
 
