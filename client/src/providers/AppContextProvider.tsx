@@ -15,7 +15,6 @@ const AppContextProvider = ({ children }: {children: React.ReactNode}) => {
 
   useEffect(() => {
     const { selectedGameId, games } = state;
-    console.log(selectedGameId);
     let title = 'English tests';
     if (selectedGameId) {
       const selectedGame = selectedGameId ? games[selectedGameId] : undefined;

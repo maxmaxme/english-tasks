@@ -81,6 +81,6 @@ app.get(subFolder + '/api/*', (req: Request<{ 0?: string }>, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+  console.log(`Backend listening at http://localhost:${port}`);
 });
 

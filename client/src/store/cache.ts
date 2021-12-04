@@ -1,4 +1,4 @@
-import { Keys } from '../shared/types/localStorage';
+import { Keys } from '../shared/types/cache';
 
 export const get = (key: Keys, fallback: any) => {
   const value = localStorage.getItem(key);
