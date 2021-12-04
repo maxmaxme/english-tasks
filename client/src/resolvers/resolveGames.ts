@@ -1,7 +1,7 @@
 import { callApi } from './api';
-import { Game, GameId, GameList } from '../shared/types/game';
+import { Game, GameId, GameList, GameVersion } from '../shared/types/game';
 import { get as localStorageGet, set as localStorageSet } from '../store/localStorage';
-import { KEYS } from '../shared/types/localStorage';
+import { getGameCacheKey, KEYS } from '../shared/types/localStorage';
 
 export const resolveGamesList = (onLoad: (gameList: GameList[]) => void) => {
   onLoad(localStorageGet(KEYS.GAMES_LIST, {}));
@@ -12,6 +12,15 @@ export const resolveGamesList = (onLoad: (gameList: GameList[]) => void) => {
     });
 };
 
-export const resolveGameById = (id: GameId): Promise<Game> => {
-  return callApi('games.getById', { id });
+export const resolveGameById = (id: GameId, version: GameVersion): Promise<Game> => {
+  const fromCache = localStorageGet(getGameCacheKey(id), undefined);
+  if (fromCache && fromCache.version === version) {
+    return Promise.resolve(fromCache);
+  }
+
+  return callApi('games.getById', { id })
+    .then((game) => {
+      localStorageSet(getGameCacheKey(id), game);
+      return game;
+    });
 };

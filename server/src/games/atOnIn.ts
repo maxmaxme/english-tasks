@@ -4,6 +4,7 @@ const answers = [{ text: 'at' }, { text: 'on' }, { text: 'in' }, { text: 'нич
 const answer = (t: string) => ({ answers: answers.map((a) => ({ ...a, correct: t === a.text })) });
 
 const game: Game = {
+  version: 1,
   id: NaN,
   name: 'Предлоги at/on/in',
   hints: [

@@ -1005,6 +1005,7 @@ const data = [
 ];
 
 export const top1000wordsInput: Game = {
+  version: 1,
   id: NaN,
   name: 'Топ-1000 английских слов',
   hints: [
@@ -1020,6 +1021,7 @@ export const top1000wordsInput: Game = {
 };
 
 export const top1000wordsQuiz: Game = {
+  version: 1,
   id: NaN,
   name: 'Топ-1000 английских слов',
   hints: [
@@ -1038,6 +1040,7 @@ export const top1000wordsQuiz: Game = {
 };
 
 export const top1000wordsQuizTranslate: Game = {
+  version: 1,
   id: NaN,
   name: 'Перевод топ-1000 английских слов',
   hints: [

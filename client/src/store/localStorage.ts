@@ -15,3 +15,7 @@ export const get = (key: Keys, fallback: any) => {
 export const set = (key: Keys, value: any) => {
   localStorage.setItem(key, JSON.stringify(value));
 };
+
+export const remove = (key: Keys) => {
+  localStorage.removeItem(key);
+};

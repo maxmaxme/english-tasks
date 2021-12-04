@@ -5,6 +5,8 @@ export type GameHint = {
   open?: boolean,
 }
 
+export type GameVersion = number;
+
 export type Game = {
   id: GameId,
   name: string,
@@ -13,12 +15,14 @@ export type Game = {
   quizQuestions?: QuizQuestion[],
   inputQuestions?: InputQuestion[],
   questionsLimit: number,
+  version: GameVersion,
 }
 
 export type GameList = {
   id: GameId,
   name: string,
   type: GameTypes,
+  version: GameVersion,
 }
 
 export const GAME_TYPES = {
