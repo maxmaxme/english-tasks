@@ -1,6 +1,6 @@
 import { Keys } from '../shared/types/cache';
 
-export const get = (key: Keys, fallback: any) => {
+export const get = <T>(key: Keys, fallback: T): T => {
   const value = localStorage.getItem(key);
   try {
     if (value === null) {
@@ -12,7 +12,7 @@ export const get = (key: Keys, fallback: any) => {
   }
 };
 
-export const set = (key: Keys, value: any) => {
+export const set = <T>(key: Keys, value: T) => {
   localStorage.setItem(key, JSON.stringify(value));
 };
 
