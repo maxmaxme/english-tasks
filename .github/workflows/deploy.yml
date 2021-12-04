@@ -17,6 +17,12 @@ jobs:
         working-directory: ./server
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 100
+      - uses: marceloprado/has-changed-path@v1
+        id: changed-back
+        with:
+          paths: server client/src/shared
       - uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
@@ -30,18 +36,25 @@ jobs:
       - name: Build
         run: npm run build
       - name: Deploy
+        if: steps.changed-back.outputs.changed == 'true'
         run: rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --exclude '.env.local' --archive --compress --delete -a node_modules build/ "${{ secrets.DEPLOY_PATH }}"
 
   deploy-frontend:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [ 12.x ]
+        node-version: [12.x]
     defaults:
       run:
         working-directory: ./client
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 100
+      - uses: marceloprado/has-changed-path@v1
+        id: changed-front
+        with:
+          paths: client
       - uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
@@ -55,4 +68,5 @@ jobs:
       - name: Build
         run: npm run build
       - name: Deploy to VK Mini Apps
+        if: steps.changed-front.outputs.changed == 'true'
         run: MINI_APPS_ACCESS_TOKEN="${{ secrets.MINI_APPS_ACCESS_TOKEN }}" npm run deploy

@@ -7,5 +7,5 @@ export const shuffle = <T>(array: T[]): T[] => {
 };
 
 export const compareArrays = <T>(array1: T[], array2: T[]): boolean => {
-  return array1.sort().join(',')=== array2.sort().join(',');
+  return array1.sort().join(',') === array2.sort().join(',');
 };
