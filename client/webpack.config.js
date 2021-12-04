@@ -10,7 +10,6 @@ module.exports = (env, options) => {
   process.env.NODE_ENV = options.mode;
 
   return ({
-    devtool: 'eval-source-map',
     output: {
       path: path.resolve(__dirname, 'build'),
       filename: '[name].[contenthash].js',
