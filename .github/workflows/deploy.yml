@@ -70,3 +70,6 @@ jobs:
       - name: Deploy to VK Mini Apps
         if: steps.changed-front.outputs.changed == 'true'
         run: MINI_APPS_ACCESS_TOKEN="${{ secrets.MINI_APPS_ACCESS_TOKEN }}" npm run deploy
+      - name: Deploy to VDS
+        if: steps.changed-front.outputs.changed == 'true'
+        run: cd build && rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . "${{ secrets.FRONTEND_DEPLOY_PATH }}"
