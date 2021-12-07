@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ConfigProvider, usePlatform } from '@vkontakte/vkui';
+import { ConfigProvider, usePlatform, WebviewType } from '@vkontakte/vkui';
 import bridge from '@vkontakte/vk-bridge';
 import { AppearanceScheme } from '@vkontakte/vkui/dist/components/ConfigProvider/ConfigProviderContext';
 
@@ -32,10 +32,12 @@ const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
     bridge.send('VKWebAppInit');
   }, []);
 
+  const isVkMiniApp = window.location.href.includes('vk_platform');
   return (
     <ConfigProvider
       platform={platform}
       scheme={scheme}
+      webviewType={isVkMiniApp ? WebviewType.VKAPPS : WebviewType.INTERNAL}
     >
       {children}
     </ConfigProvider>
