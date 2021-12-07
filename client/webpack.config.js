@@ -13,7 +13,7 @@ module.exports = (env, options) => {
   return ({
     output: {
       path: path.resolve(__dirname, 'build'),
-      filename: '[name].[contenthash].js',
+      filename: 'js/[name].[contenthash].js',
     },
     resolve: {
       modules: [path.join(__dirname, 'src'), 'node_modules'],
@@ -68,13 +68,14 @@ module.exports = (env, options) => {
       ...(isDev ? [] : [
         new CleanWebpackPlugin(),
         new MiniCssExtractPlugin({
-          filename: '[name].[contenthash].css',
-          chunkFilename: '[name].[contenthash].css',
+          filename: 'css/[name].[contenthash].css',
+          chunkFilename: 'css/[name].[contenthash].css',
         }),
       ]),
       new CopyPlugin({
         patterns: [
           { from: 'src/assets', to: 'assets' },
+          { from: 'src/sw.js', to: 'js/sw.js' },
         ],
       }),
     ],

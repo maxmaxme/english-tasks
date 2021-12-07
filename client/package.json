@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "",
   "scripts": {
-    "start": "webpack-dev-server --mode=development --open --hot",
+    "start": "webpack-dev-server --mode=development --hot --https",
     "build": "webpack --mode=production",
     "eslint": "eslint --ext .tsx --ext .ts src/",
     "deploy": "vk-miniapps-deploy",

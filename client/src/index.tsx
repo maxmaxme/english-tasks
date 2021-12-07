@@ -17,3 +17,7 @@ render(
   </AppContextProvider>,
   document.getElementById('root'),
 );
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./js/sw.js');
+}
