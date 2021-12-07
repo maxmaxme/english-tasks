@@ -4,6 +4,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const getScopedName = require('./src/helpers/getScopedName');
 const Dotenv = require('dotenv-webpack');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = (env, options) => {
   const isDev = options.mode === 'development';
@@ -12,7 +13,7 @@ module.exports = (env, options) => {
   return ({
     output: {
       path: path.resolve(__dirname, 'build'),
-      filename: '[name].[contenthash].js',
+      filename: 'js/[name].[contenthash].js',
     },
     resolve: {
       modules: [path.join(__dirname, 'src'), 'node_modules'],
@@ -67,10 +68,16 @@ module.exports = (env, options) => {
       ...(isDev ? [] : [
         new CleanWebpackPlugin(),
         new MiniCssExtractPlugin({
-          filename: '[name].[contenthash].css',
-          chunkFilename: '[name].[contenthash].css',
+          filename: 'css/[name].[contenthash].css',
+          chunkFilename: 'css/[name].[contenthash].css',
         }),
       ]),
+      new CopyPlugin({
+        patterns: [
+          { from: 'src/assets', to: 'assets' },
+          { from: 'src/sw.js', to: 'js/sw.js' },
+        ],
+      }),
     ],
   });
 };
