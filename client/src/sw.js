@@ -1,9 +1,9 @@
 const cacheName = 's-v1';
 const networkFirstPaths = [
-  /^\/$/,
-  /^\/index.html/,
-  /^\/js\/.*\.js$/,
-  /^\/css\/.*\.css$/,
+  /^(\/english)?\/$/,
+  /^(\/english)?\/index.html/,
+  /^(\/english)?\/js\/.*\.js$/,
+  /^(\/english)?\/css\/.*\.css$/,
 ];
 
 const cacheFirstPaths = [

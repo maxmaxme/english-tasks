@@ -11,6 +11,7 @@ module.exports = (env, options) => {
   process.env.NODE_ENV = options.mode;
 
   return ({
+    devtool: isDev ? 'eval-source-map' : undefined,
     output: {
       path: path.resolve(__dirname, 'build'),
       filename: 'js/[name].[contenthash].js',
@@ -75,7 +76,7 @@ module.exports = (env, options) => {
       new CopyPlugin({
         patterns: [
           { from: 'src/assets', to: 'assets' },
-          { from: 'src/sw.js', to: 'js/sw.js' },
+          { from: 'src/sw.js', to: 'sw.js' },
         ],
       }),
     ],
