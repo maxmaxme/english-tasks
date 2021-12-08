@@ -1,38 +1,53 @@
 import React, { useEffect, useState } from 'react';
 import { ConfigProvider, usePlatform, WebviewType } from '@vkontakte/vkui';
 import bridge from '@vkontakte/vk-bridge';
-import { AppearanceScheme } from '@vkontakte/vkui/dist/components/ConfigProvider/ConfigProviderContext';
+import { AppearanceSchemeType } from '@vkontakte/vk-bridge/dist/types/src/types/data';
+
+const getTheme = (isLight: boolean): AppearanceSchemeType => isLight ? 'bright_light' : 'space_gray';
+const getStatusBarColor = (isLight: boolean): string => isLight ? '#ffffff' : '#191919';
+
+function changeScheme(isLight: boolean, setScheme: (scheme: AppearanceSchemeType) => void) {
+  setScheme(getTheme(isLight));
+
+  if (bridge.supports('VKWebAppSetViewSettings')) { // mini app
+    bridge.send('VKWebAppSetViewSettings', {
+      'status_bar_style': isLight ? 'dark' : 'light', // верхний цвет иконок
+      'action_bar_color': getStatusBarColor(isLight), // верняя панель, андроид
+      'navigation_bar_color': getStatusBarColor(isLight), // нижняя панель, андроид
+    });
+  } else { // web
+    document
+      .querySelector('meta[name="theme-color"]')
+      ?.setAttribute('content', getStatusBarColor(isLight));
+  }
+}
 
 const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
   const platform = usePlatform();
-  const lights = ['bright_light', 'client_light', 'vkcom_light'];
+  const isVkMiniApp = window.location.href.includes('vk_platform');
 
-  const [scheme, setScheme] = useState<AppearanceScheme>('bright_light');
+  const isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const [scheme, setScheme] = useState<AppearanceSchemeType>(getTheme(!isDark));
 
   useEffect(() => {
-    function changeScheme(scheme: string) {
-      const isLight = lights.includes(scheme);
-      setScheme(isLight ? 'bright_light' : 'space_gray');
+    if (isVkMiniApp) {
+      bridge.subscribe(({ detail: { type, data } }) => {
+        if (type === 'VKWebAppUpdateConfig') {
+          // @ts-ignore
+          const isLight = ['bright_light', 'client_light', 'vkcom_light'].includes(data.scheme);
+          changeScheme(isLight, setScheme);
+        }
+      });
 
-      if (bridge.supports('VKWebAppSetViewSettings')) {
-        bridge.send('VKWebAppSetViewSettings', {
-          'status_bar_style': isLight ? 'dark' : 'light',
-          'action_bar_color': isLight ? '#ffffff' : '#191919',
+      bridge.send('VKWebAppInit');
+    } else {
+      window.matchMedia('(prefers-color-scheme: dark)')
+        .addEventListener('change', ({ matches: isDark }) => {
+          changeScheme(!isDark, setScheme);
         });
-      }
     }
-
-    bridge.subscribe(({ detail: { type, data } }) => {
-      if (type === 'VKWebAppUpdateConfig') {
-        // @ts-ignore
-        changeScheme(data.scheme);
-      }
-    });
-
-    bridge.send('VKWebAppInit');
   }, []);
 
-  const isVkMiniApp = window.location.href.includes('vk_platform');
   return (
     <ConfigProvider
       platform={platform}
