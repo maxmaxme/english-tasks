@@ -41,6 +41,7 @@ const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
 
       bridge.send('VKWebAppInit');
     } else {
+      changeScheme(!isDark, setScheme);
       window.matchMedia('(prefers-color-scheme: dark)')
         .addEventListener('change', ({ matches: isDark }) => {
           changeScheme(!isDark, setScheme);
