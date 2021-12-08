@@ -1,10 +1,6 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../../store/context';
-import {
-  AppRoot,
-  View,
-  Root,
-} from '@vkontakte/vkui';
+import { AppRoot, Root, View } from '@vkontakte/vkui';
 import { GamesList as GamesListPanel } from '../../panels/GamesList';
 import { Game as GamePanel } from '../../panels/Game';
 
