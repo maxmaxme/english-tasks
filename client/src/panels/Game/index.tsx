@@ -6,7 +6,10 @@ import { Actions } from '../../store/actions';
 import { resolveGameById } from '../../resolvers/resolveGames';
 
 export const Game = ({ id: panelId }: {id: string}) => {
-  const onBackClick = () => dispatch({ type: Actions.SET_SELECTED_GAME_ID, payload: undefined });
+  const onBackClick = () => {
+    dispatch({ type: Actions.SET_SELECTED_GAME_ID, payload: undefined });
+    dispatch({ type: Actions.POP_HISTORY, payload: undefined });
+  };
 
   const { state: { selectedGameId, games, gamesList }, dispatch } = useContext(AppContext);
   const [isLoading, setIsLoading] = useState(false);
