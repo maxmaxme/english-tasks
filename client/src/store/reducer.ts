@@ -27,6 +27,16 @@ export const reducer = (state: AppContextType<Dispatch<Action>>['state'], action
       ...state,
       selectedGameId: action.payload,
     };
+  case Actions.PUSH_HISTORY:
+    return {
+      ...state,
+      history: state.history.concat(action.payload),
+    };
+  case Actions.POP_HISTORY:
+    return {
+      ...state,
+      history: state.history.slice(0, -1),
+    };
   default:
     // @ts-ignore
     throw new Error(`reducer for ${action.type} not found`);

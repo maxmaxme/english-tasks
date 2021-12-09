@@ -25,6 +25,7 @@ function changeScheme(isLight: boolean, setScheme: (scheme: AppearanceSchemeType
 const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
   const platform = usePlatform();
   const isVkMiniApp = window.location.href.includes('vk_platform');
+  const isPWA = window.location.href.includes('pwa');
 
   const isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
   const [scheme, setScheme] = useState<AppearanceSchemeType>(getTheme(!isDark));
@@ -51,6 +52,7 @@ const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <ConfigProvider
+      isWebView={isPWA ? true : undefined}
       platform={platform}
       scheme={scheme}
       webviewType={isVkMiniApp ? WebviewType.VKAPPS : WebviewType.INTERNAL}

@@ -2,7 +2,7 @@
     "short_name": "English",
     "name": "English tests",
     "description": "English tests app",
-    "start_url": "..",
+    "start_url": "..?pwa=1",
     "display": "fullscreen",
     "theme_color": "#fff",
     "background_color": "#fff",
