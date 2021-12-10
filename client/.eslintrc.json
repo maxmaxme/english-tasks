@@ -5,14 +5,17 @@
   },
   "extends": [
     "plugin:react/recommended",
-    "google"
+    "google",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
     },
-    "ecmaVersion": 13,
+    "ecmaVersion": 12,
     "sourceType": "module"
   },
   "plugins": [
@@ -24,6 +27,13 @@
     "react/jsx-tag-spacing": ["error", {"beforeSelfClosing": "always"}],
     "max-len": ["error", {"code": 180}],
     "indent": ["error", 2],
-    "require-jsdoc": "off"
+    "require-jsdoc": "off",
+    "@typescript-eslint/no-empty-function": "off",
+    "@typescript-eslint/ban-ts-comment": "off"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   }
 }

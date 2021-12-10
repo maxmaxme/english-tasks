@@ -27,7 +27,7 @@ export const GameRules = ({ id: panelId }: {id: string}) => {
 
   const content = isLoading || !selectedGame ?
     <PanelSpinner /> :
-    <GameRulesComponent game={selectedGame!} />;
+    <GameRulesComponent game={selectedGame} />;
 
   return (
     <Panel id={panelId}>

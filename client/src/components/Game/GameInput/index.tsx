@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import { InputQuestion } from '../../../shared/types/game';
 import { shuffle } from '../../../shared/helpers/array';
 import styles from './styles.css';
@@ -39,7 +39,7 @@ export const GameInput = ({ questions: originalQuestions, limit = 10 }: Props) =
   };
   useEffect(initGame, [originalQuestions]);
 
-  const checkAnswer = (e: any) => {
+  const checkAnswer = (e: FormEvent) => {
     e.preventDefault();
     if (isCorrect) {
       setCorrectAnswersCount((value) => value + 1);

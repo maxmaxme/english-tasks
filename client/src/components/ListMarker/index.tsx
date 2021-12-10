@@ -3,7 +3,7 @@ import cn from 'classnames';
 import styles from './index.css';
 
 type Props = {
-  children: any;
+  children: React.ReactNode;
   selected: boolean,
 }
 
