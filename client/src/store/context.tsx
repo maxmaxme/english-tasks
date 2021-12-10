@@ -1,7 +1,21 @@
 import { createContext, Dispatch } from 'react';
-import { AppContext as AppContextType } from '../shared/types/context';
 import { Action } from './actions';
 import { Panel, PANELS } from '../panels/navigation';
+import { Game, GameId, GameList } from '../shared/types/game';
+
+export type AppContextType<T> = {
+  state: {
+    gamesList: GameList[],
+    history: string[],
+    games: {[key: GameId]: Game},
+    globalError: undefined | string,
+    selectedGameId: undefined | GameId,
+  }
+  dispatch: T,
+  go: (panel: Panel) => void,
+  goBack: () => void,
+};
+
 
 export const AppContextInitialValue = {
   gamesList: [],
