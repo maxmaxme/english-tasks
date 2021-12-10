@@ -2,26 +2,32 @@ import React, { useCallback, useContext } from 'react';
 import { AppContext } from '../../store/context';
 import { AppRoot, Root, View } from '@vkontakte/vkui';
 import { GamesList as GamesListPanel } from '../../panels/GamesList';
+import { GameRules as GameRulesPanel } from '../../panels/GameRules';
 import { Game as GamePanel } from '../../panels/Game';
 import { Actions } from '../../store/actions';
-import { Panel, PANELS } from '../../shared/types/panel';
+import { getFallbackPanelId, getViewByPanelId, Panel, PANELS, View as ViewType, VIEWS } from '../../panels/navigation';
+
 
 export const App = () => {
-  const { state: { history }, dispatch } = useContext(AppContext);
+  const { state: { history }, dispatch, goBack } = useContext(AppContext);
 
   const activePanel: Panel = history[history.length - 1] || PANELS.GAMES_LIST;
+  const activeView: ViewType = getViewByPanelId(activePanel);
   const onSwipeBack = useCallback( () => {
-    if (activePanel === PANELS.GAME) {
+    if (activePanel === PANELS.GAME_RULES) {
       dispatch({ type: Actions.SET_SELECTED_GAME_ID, payload: undefined });
     }
-    dispatch({ type: Actions.POP_HISTORY, payload: undefined });
+    goBack();
   }, [activePanel]);
 
   return (
     <AppRoot>
-      <Root activeView="view">
-        <View id="view" activePanel={activePanel} onSwipeBack={onSwipeBack} history={history}>
+      <Root activeView={activeView}>
+        <View id={VIEWS.MENU} activePanel={getFallbackPanelId(history, VIEWS.MENU)} onSwipeBack={onSwipeBack} history={history}>
           <GamesListPanel id={PANELS.GAMES_LIST} />
+          <GameRulesPanel id={PANELS.GAME_RULES} />
+        </View>
+        <View id={VIEWS.GAME} activePanel={getFallbackPanelId(history, VIEWS.GAME)}>
           <GamePanel id={PANELS.GAME} />
         </View>
       </Root>

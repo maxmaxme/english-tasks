@@ -1,7 +1,7 @@
 import { createContext, Dispatch } from 'react';
 import { AppContext as AppContextType } from '../shared/types/context';
 import { Action } from './actions';
-import { PANELS } from '../shared/types/panel';
+import { Panel, PANELS } from '../panels/navigation';
 
 export const AppContextInitialValue = {
   gamesList: [],
@@ -14,4 +14,6 @@ export const AppContextInitialValue = {
 export const AppContext = createContext<AppContextType<Dispatch<Action>>>({
   state: AppContextInitialValue,
   dispatch: () => {},
+  go: (panel: Panel) => {},
+  goBack: () => {},
 });

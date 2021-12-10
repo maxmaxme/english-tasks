@@ -1,12 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Panel, PanelHeader, PanelHeaderClose, PanelSpinner } from '@vkontakte/vkui';
+import { Panel, PanelHeader, PanelHeaderBack, PanelSpinner } from '@vkontakte/vkui';
 import { AppContext } from '../../store/context';
-import { Game as GameComponent } from '../../components/Game';
+import { GameRules as GameRulesComponent } from '../../components/Game/GameRules';
 import { Actions } from '../../store/actions';
 import { resolveGameById } from '../../resolvers/resolveGames';
-import { Icon28CancelOutline } from '@vkontakte/icons';
 
-export const Game = ({ id: panelId }: {id: string}) => {
+export const GameRules = ({ id: panelId }: {id: string}) => {
   const { state: { selectedGameId, games, gamesList }, dispatch, goBack } = useContext(AppContext);
   const [isLoading, setIsLoading] = useState(false);
   const selectedGame = selectedGameId ? games[selectedGameId] : undefined;
@@ -28,16 +27,11 @@ export const Game = ({ id: panelId }: {id: string}) => {
 
   const content = isLoading || !selectedGame ?
     <PanelSpinner /> :
-    <GameComponent game={selectedGame!} />;
+    <GameRulesComponent game={selectedGame!} />;
 
   return (
     <Panel id={panelId}>
-      <PanelHeader
-        separator={false}
-        left={<PanelHeaderClose onClick={goBack}><Icon28CancelOutline /></PanelHeaderClose>}
-      >
-        {selectedGame?.name || 'Loading'}
-      </PanelHeader>
+      <PanelHeader separator={false} left={<PanelHeaderBack onClick={goBack} />}>{selectedGame?.name || 'Loading'}</PanelHeader>
       {content}
     </Panel>
   );

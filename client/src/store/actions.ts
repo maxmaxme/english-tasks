@@ -1,5 +1,5 @@
 import { Game, GameId, GameList } from '../shared/types/game';
-import { Panel } from '../shared/types/panel';
+import { Panel } from '../panels/navigation';
 
 export enum Actions {
   // eslint-disable-next-line no-unused-vars
@@ -25,5 +25,5 @@ export type Action =
   | { type: Actions.SET_GLOBAL_ERROR, payload: string | undefined }
   | { type: Actions.SET_SELECTED_GAME_ID, payload: GameId | undefined }
   | { type: Actions.PUSH_HISTORY, payload: Panel }
-  | { type: Actions.POP_HISTORY, payload: undefined }
+  | { type: Actions.POP_HISTORY }
 ;
