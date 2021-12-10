@@ -1,13 +1,13 @@
-name: Deploy
+name: Build
 
 on:
   workflow_dispatch:
+  pull_request:
   push:
     branches:
       - main
-
 jobs:
-  deploy-backend:
+  build-backend:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -26,19 +26,14 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      # Setup key
-      - run: set -eu
-      - run: mkdir "$HOME/.ssh"
-      - run: echo "${{ secrets.SSH_KEY }}" > "$HOME/.ssh/key"
-      - run: chmod 600 "$HOME/.ssh/key"
       - run: npm ci
       # Build
       - name: Build
         run: npm run build
-      - name: Deploy
-      # Deploy
-        if: steps.changed-back.outputs.changed == 'true'
-        run: rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --exclude '.env.local' --archive --compress --delete -a node_modules build/ "${{ secrets.DEPLOY_PATH }}"
+      - name: Jest
+        run: npm run jest
+      - name: ESLint
+        run: npm run eslint
 
   deploy-frontend:
     runs-on: ubuntu-latest
@@ -59,19 +54,9 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      # Setup key
-      - run: set -eu
-      - run: mkdir "$HOME/.ssh"
-      - run: echo "${{ secrets.SSH_KEY }}" > "$HOME/.ssh/key"
-      - run: chmod 600 "$HOME/.ssh/key"
       - run: npm ci
       # Build
       - name: Build
         run: npm run build
-      # Deploy
-      - name: Deploy to VK Mini Apps
-        if: steps.changed-front.outputs.changed == 'true'
-        run: MINI_APPS_ACCESS_TOKEN="${{ secrets.MINI_APPS_ACCESS_TOKEN }}" npm run deploy
-      - name: Deploy to VDS
-        if: steps.changed-front.outputs.changed == 'true'
-        run: cd build && rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . "${{ secrets.FRONTEND_DEPLOY_PATH }}"
+      - name: ESLint
+        run: npm run eslint

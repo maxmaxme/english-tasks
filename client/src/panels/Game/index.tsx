@@ -28,7 +28,7 @@ export const Game = ({ id: panelId }: {id: string}) => {
 
   const content = isLoading || !selectedGame ?
     <PanelSpinner /> :
-    <GameComponent game={selectedGame!} />;
+    <GameComponent game={selectedGame} />;
 
   return (
     <Panel id={panelId}>

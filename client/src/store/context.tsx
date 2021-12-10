@@ -28,6 +28,7 @@ export const AppContextInitialValue = {
 export const AppContext = createContext<AppContextType<Dispatch<Action>>>({
   state: AppContextInitialValue,
   dispatch: () => {},
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   go: (panel: Panel) => {},
   goBack: () => {},
 });

@@ -8,8 +8,11 @@ type Props = {
 }
 
 export const Game = ({ game }: Props) => {
-  return (<>
-    {game.type === GAME_TYPES.QUIZ && <GameQuiz questions={game.quizQuestions!} limit={game.questionsLimit} />}
-    {game.type === GAME_TYPES.INPUT && <GameInput questions={game.inputQuestions!} limit={game.questionsLimit} />}
-  </>);
+  if (game.type === GAME_TYPES.QUIZ && game.quizQuestions) {
+    return <GameQuiz questions={game.quizQuestions} limit={game.questionsLimit} />;
+  }
+  if (game.type === GAME_TYPES.INPUT && game.inputQuestions) {
+    return <GameInput questions={game.inputQuestions} limit={game.questionsLimit} />;
+  }
+  return null;
 };
