@@ -3,7 +3,7 @@
     "name": "English tests",
     "description": "English tests app",
     "start_url": "..?pwa=1",
-    "display": "fullscreen",
+    "display": "standalone",
     "theme_color": "#fff",
     "background_color": "#fff",
     "icons": [

@@ -3,6 +3,7 @@ import { AppContext, AppContextInitialValue } from '../store/context';
 import { reducer } from '../store/reducer';
 import { resolveGamesList } from '../resolvers/resolveGames';
 import { Actions } from '../store/actions';
+import { PANELS } from '../panels/navigation';
 
 const AppContextProvider = ({ children }: {children: React.ReactNode}) => {
   const [state, dispatch] = useReducer(reducer, AppContextInitialValue);
@@ -14,9 +15,14 @@ const AppContextProvider = ({ children }: {children: React.ReactNode}) => {
   }, []);
 
   useEffect(() => {
-    const { selectedGameId, games } = state;
+    const { selectedGameId, games, history } = state;
     let title = 'English tests';
-    if (selectedGameId) {
+
+    const gamePanels = [
+      PANELS.GAME,
+      PANELS.GAME_RULES,
+    ];
+    if (selectedGameId && gamePanels.includes(history[history.length - 1])) {
       const selectedGame = selectedGameId ? games[selectedGameId] : undefined;
       if (selectedGame) {
         title = selectedGame.name;
@@ -25,10 +31,15 @@ const AppContextProvider = ({ children }: {children: React.ReactNode}) => {
       }
     }
     document.title = title;
-  }, [state.selectedGameId, state.games]);
+  }, [state.selectedGameId, state.games, state.history]);
 
   return (
-    <AppContext.Provider value={{ state, dispatch }}>
+    <AppContext.Provider value={{
+      state,
+      dispatch,
+      go: (panel) => dispatch({ type: Actions.PUSH_HISTORY, payload: panel }),
+      goBack: () => dispatch({ type: Actions.POP_HISTORY }),
+    }}>
       {children}
     </AppContext.Provider>
   );

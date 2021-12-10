@@ -3,17 +3,17 @@ import { GameList } from '../../shared/types/game';
 import { AppContext } from '../../store/context';
 import { Actions } from '../../store/actions';
 import { SimpleCell } from '@vkontakte/vkui';
-import { PANELS } from '../../shared/types/panel';
+import { PANELS } from '../../panels/navigation';
 
 type Props = {
   game: GameList,
 }
 
 export const GamesListItem = ({ game }: Props) => {
-  const { dispatch } = useContext(AppContext);
+  const { dispatch, go } = useContext(AppContext);
   const onClick = () => {
     dispatch({ type: Actions.SET_SELECTED_GAME_ID, payload: game.id });
-    dispatch({ type: Actions.PUSH_HISTORY, payload: PANELS.GAME });
+    go(PANELS.GAME_RULES);
   };
 
   return (
