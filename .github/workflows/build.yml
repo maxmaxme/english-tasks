@@ -30,12 +30,10 @@ jobs:
       # Build
       - name: Build
         run: npm run build
-      - name: Jest
-        run: npm run jest
       - name: ESLint
         run: npm run eslint
 
-  deploy-frontend:
+  build-frontend:
     runs-on: ubuntu-latest
     strategy:
       matrix:
