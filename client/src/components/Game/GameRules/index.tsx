@@ -16,7 +16,7 @@ export const GameRules = ({ game }: Props) => {
       <Separator />
       <GameHints hints={game.hints} />
       <Div>
-        <Button stretched mode="secondary" onClick={() => go(PANELS.GAME)} size="l">Начать</Button>
+        <Button data-test-id="GameStartButton" stretched mode="secondary" onClick={() => go(PANELS.GAME)} size="l">Начать</Button>
       </Div>
     </>
   );

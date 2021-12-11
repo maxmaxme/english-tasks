@@ -31,7 +31,7 @@ export const GameRules = ({ id: panelId }: {id: string}) => {
 
   return (
     <Panel id={panelId}>
-      <PanelHeader separator={false} left={<PanelHeaderBack onClick={goBack} />}>{selectedGame?.name || 'Loading'}</PanelHeader>
+      <PanelHeader separator={false} left={<PanelHeaderBack data-test-id="GameRulesBackButton" onClick={goBack} />}>{selectedGame?.name || 'Loading'}</PanelHeader>
       {content}
     </Panel>
   );
