@@ -17,6 +17,6 @@ export const GamesListItem = ({ game }: Props) => {
   };
 
   return (
-    <SimpleCell onClick={onClick} expandable>{game.name}</SimpleCell>
+    <SimpleCell data-test-id="GamesListItem" onClick={onClick} expandable>{game.name}</SimpleCell>
   );
 };

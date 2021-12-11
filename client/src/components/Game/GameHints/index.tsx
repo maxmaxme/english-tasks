@@ -10,7 +10,7 @@ export const GameHints = ({ hints }: {hints: GameHintType[]}) => {
   }
 
   return (<>
-    <CardGrid size="l" className={styles.cards}>
+    <CardGrid data-test-id="GameHints" size="l" className={styles.cards}>
       {hints.map((hint, i) => <GameHint hint={hint} key={i} />)}
     </CardGrid>
   </>);

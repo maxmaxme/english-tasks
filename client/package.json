@@ -6,7 +6,8 @@
     "start": "webpack-dev-server --mode=development --hot",
     "build": "webpack --mode=production",
     "eslint": "eslint --ext .tsx --ext .ts src/",
-    "deploy": "vk-miniapps-deploy"
+    "deploy": "vk-miniapps-deploy",
+    "e2e": "npx playwright test tests/"
   },
   "repository": {
     "type": "git",

@@ -34,7 +34,7 @@ export const Game = ({ id: panelId }: {id: string}) => {
     <Panel id={panelId}>
       <PanelHeader
         separator={false}
-        left={<PanelHeaderClose onClick={goBack}><Icon28CancelOutline /></PanelHeaderClose>}
+        left={<PanelHeaderClose data-test-id="GameBackButton" onClick={goBack}><Icon28CancelOutline /></PanelHeaderClose>}
       >
         {selectedGame?.name || 'Loading'}
       </PanelHeader>
