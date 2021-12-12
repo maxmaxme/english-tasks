@@ -77,7 +77,7 @@ export const GameInput = ({ questions: originalQuestions, limit = 10 }: Props) =
     <Div>
       <Title level="1" weight="regular" className={styles.question}>
         {question.question}
-        {question.questionSound && <div className={styles.questionSound}><Sound url={question.questionSound} /></div>}
+        {question.questionSound && <div className={styles.questionSound}><Sound size="20" url={question.questionSound} /></div>}
         {question.hint && ` (${question.hint})`}
       </Title>
     </Div>

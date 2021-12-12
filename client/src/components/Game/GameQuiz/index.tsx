@@ -96,7 +96,7 @@ export const GameQuiz = ({ questions: originalQuestions, limit = 10 }: Props) =>
         className={styles.question}
       >
         {question.question}
-        {question.questionSound && <div className={styles.questionSound}><Sound url={question.questionSound} /></div>}
+        {question.questionSound && <div className={styles.questionSound}><Sound size="20" url={question.questionSound} /></div>}
       </Title>
 
       <Group aria-label="Варианты ответа" className={styles.answerButtons}>
