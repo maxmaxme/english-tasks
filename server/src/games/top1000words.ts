@@ -1040,7 +1040,7 @@ export const top1000wordsQuiz: Game = {
 };
 
 export const top1000wordsQuizTranslate: Game = {
-  version: 1,
+  version: 2,
   id: NaN,
   name: 'Перевод топ-1000 английских слов',
   hints: [

@@ -123,7 +123,7 @@ const irregularVerbs2: [string, string[], string[], string][] = [
   ['write', ['wrote'], ['written'], 'писать']];
 
 export const pastSimple: Game = {
-  version: 1,
+  version: 2,
   id: NaN,
   name: 'Past simple (irregular verbs)',
   hints: [
@@ -140,7 +140,7 @@ export const pastSimple: Game = {
 };
 
 export const v3: Game = {
-  version: 1,
+  version: 2,
   id: NaN,
   name: 'Participle II (V3)',
   hints: [
