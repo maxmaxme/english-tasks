@@ -130,7 +130,12 @@ export const pastSimple: Game = {
     { open: true, title: 'В чём суть?', content: 'Будут предложены глаголы Infinitive. Нужно в поле ввода ввести глагол в Past Simple' },
   ],
   type: GAME_TYPES.INPUT,
-  inputQuestions: irregularVerbs2.map(([question, answers, , hint]) => ({ question, answers, hint })),
+  inputQuestions: irregularVerbs2.map(([question, answers, , hint]) => ({
+    question,
+    questionSound: 'https://practicum.yandex.ru/flow/api/text-to-speech?text=' + question,
+    answers,
+    hint,
+  })),
   questionsLimit: 10,
 };
 
@@ -142,6 +147,11 @@ export const v3: Game = {
     { open: true, title: 'В чём суть?', content: 'Будут предложены глаголы Infinitive. Нужно в поле ввода ввести глагол для времён группы Perfect' },
   ],
   type: GAME_TYPES.INPUT,
-  inputQuestions: irregularVerbs2.map(([question, , answers, hint]) => ({ question, answers, hint })),
+  inputQuestions: irregularVerbs2.map(([question, , answers, hint]) => ({
+    question,
+    questionSound: 'https://practicum.yandex.ru/flow/api/text-to-speech?text=' + question,
+    answers,
+    hint,
+  })),
   questionsLimit: 10,
 };

@@ -46,6 +46,7 @@ export type QuizQuestionAnswer = {
 
 export type InputQuestion = {
   question: string,
+  questionSound?: string, // url
   hint?: string,
   answers: string[],
 }

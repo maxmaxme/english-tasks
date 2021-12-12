@@ -1,3 +1,11 @@
 .question {
   text-align: center;
 }
+
+.questionSound {
+  margin-left: 6px;
+  display: inline-flex;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+}

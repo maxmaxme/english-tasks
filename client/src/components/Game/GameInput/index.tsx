@@ -5,6 +5,7 @@ import styles from './styles.css';
 import { Button, Div, FormItem, FormLayout, Input, PanelSpinner, Progress, Title } from '@vkontakte/vkui';
 import { FormItemProps } from '@vkontakte/vkui/src/components/FormItem/FormItem';
 import { GameFinish } from '../GameFinish';
+import { Sound } from '../Sound';
 
 type Props = {
   questions: InputQuestion[],
@@ -71,15 +72,14 @@ export const GameInput = ({ questions: originalQuestions, limit = 10 }: Props) =
     return 'default';
   };
 
-  let hint = null;
-  if (question.hint) {
-    hint = ` (${question.hint})`;
-  }
-
   return (<>
     <Progress value={questionIndex/questions.length * 100} />
     <Div>
-      <Title level="1" weight="regular" className={styles.question}>{question.question}{hint}</Title>
+      <Title level="1" weight="regular" className={styles.question}>
+        {question.question}
+        {question.questionSound && <div className={styles.questionSound}><Sound url={question.questionSound} /></div>}
+        {question.hint && ` (${question.hint})`}
+      </Title>
     </Div>
     {(step === 'answer' && !isCorrect) && <Div>{question.answers.join(' / ')}</Div>}
 
