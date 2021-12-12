@@ -1,5 +1,5 @@
 import { Icon16PlayCircleFillAzure, Icon16PlayCircleFillGray, Icon20PlayCircle, Icon20PlayCircleFillSteelGray } from '@vkontakte/icons';
-import React, { FC, HTMLAttributes, useEffect, useState } from 'react';
+import React, { FC, HTMLAttributes, useEffect, useMemo, useState } from 'react';
 import styles from './index.css';
 
 type Props = {
@@ -20,7 +20,7 @@ const playIconComponents: { [key: string]: { paused: ComponentType, playing: Com
 };
 
 export const Sound = ({ url, size }: Props) => {
-  const [audio] = useState(new Audio(url));
+  const audio = useMemo(() => new Audio(url), [url]);
   const [playing, setPlaying] = useState(false);
 
   const toggle = () => setPlaying(!playing);
@@ -34,7 +34,7 @@ export const Sound = ({ url, size }: Props) => {
     return () => {
       audio.removeEventListener('ended', () => setPlaying(false));
     };
-  }, []);
+  }, [audio]);
 
   const Component = playIconComponents[size][playing ? 'playing' : 'paused'];
   return <Component className={styles.icon} onClick={toggle} />;
