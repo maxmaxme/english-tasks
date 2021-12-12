@@ -6,6 +6,7 @@ import { Button, Div, Group, PanelSpinner, Progress, SimpleCell, Title } from '@
 import cn from 'classnames';
 import { ListMarker } from '../../ListMarker';
 import { GameFinish } from '../GameFinish';
+import { Sound } from '../Sound';
 
 type Props = {
   questions: QuizQuestion[],
@@ -93,7 +94,10 @@ export const GameQuiz = ({ questions: originalQuestions, limit = 10 }: Props) =>
         aria-label={'При' + question.question + ' нужно ставить:'}
         level="1" weight="regular"
         className={styles.question}
-      >{question.question}</Title>
+      >
+        {question.question}
+        {question.questionSound && <div className={styles.questionSound}><Sound url={question.questionSound} /></div>}
+      </Title>
 
       <Group aria-label="Варианты ответа" className={styles.answerButtons}>
         {question.answers.map((answer, i) => (

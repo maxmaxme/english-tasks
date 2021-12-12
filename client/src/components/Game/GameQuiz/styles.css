@@ -24,3 +24,10 @@
   margin-top: 10px;
 }
 
+.questionSound {
+  margin-left: 10px;
+  display: inline-flex;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+}

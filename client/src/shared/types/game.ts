@@ -35,6 +35,7 @@ export type GameTypes = typeof GAME_TYPES[GameTypesKeys];
 
 export type QuizQuestion = {
   question: string,
+  questionSound?: string, // url
   answers: QuizQuestionAnswer[]
 }
 
