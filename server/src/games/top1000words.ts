@@ -1040,7 +1040,7 @@ export const top1000wordsQuiz: Game = {
 };
 
 export const top1000wordsQuizTranslate: Game = {
-  version: 1,
+  version: 2,
   id: NaN,
   name: 'Перевод топ-1000 английских слов',
   hints: [
@@ -1051,9 +1051,12 @@ export const top1000wordsQuizTranslate: Game = {
     },
   ],
   type: GAME_TYPES.QUIZ,
-  quizQuestions: data.map(([question, answer]) => ({ question, answers: shuffle([
-    { text: answer, correct: true },
-    ...shuffle(data).slice(0, 3).map((r) => ({ text: r[1] })),
-  ]) })),
+  quizQuestions: data.map(([question, answer]) => ({
+    question,
+    questionSound: 'https://practicum.yandex.ru/flow/api/text-to-speech?text=' + question,
+    answers: shuffle([
+      { text: answer, correct: true },
+      ...shuffle(data).slice(0, 3).map((r) => ({ text: r[1] })),
+    ]) })),
   questionsLimit: 10,
 };

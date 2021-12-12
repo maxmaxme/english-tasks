@@ -123,25 +123,35 @@ const irregularVerbs2: [string, string[], string[], string][] = [
   ['write', ['wrote'], ['written'], 'писать']];
 
 export const pastSimple: Game = {
-  version: 1,
+  version: 2,
   id: NaN,
   name: 'Past simple (irregular verbs)',
   hints: [
     { open: true, title: 'В чём суть?', content: 'Будут предложены глаголы Infinitive. Нужно в поле ввода ввести глагол в Past Simple' },
   ],
   type: GAME_TYPES.INPUT,
-  inputQuestions: irregularVerbs2.map(([question, answers, , hint]) => ({ question, answers, hint })),
+  inputQuestions: irregularVerbs2.map(([question, answers, , hint]) => ({
+    question,
+    questionSound: 'https://practicum.yandex.ru/flow/api/text-to-speech?text=' + question,
+    answers,
+    hint,
+  })),
   questionsLimit: 10,
 };
 
 export const v3: Game = {
-  version: 1,
+  version: 2,
   id: NaN,
   name: 'Participle II (V3)',
   hints: [
     { open: true, title: 'В чём суть?', content: 'Будут предложены глаголы Infinitive. Нужно в поле ввода ввести глагол для времён группы Perfect' },
   ],
   type: GAME_TYPES.INPUT,
-  inputQuestions: irregularVerbs2.map(([question, , answers, hint]) => ({ question, answers, hint })),
+  inputQuestions: irregularVerbs2.map(([question, , answers, hint]) => ({
+    question,
+    questionSound: 'https://practicum.yandex.ru/flow/api/text-to-speech?text=' + question,
+    answers,
+    hint,
+  })),
   questionsLimit: 10,
 };
