@@ -1,5 +1,6 @@
 export const PANELS = {
   GAME_RULES: 'game_rules',
+  RULES_ITEM: 'rules_item',
   GAMES_LIST: 'games_list',
   GAME: 'game',
 };
@@ -19,6 +20,7 @@ export const navigation = {
   [VIEWS.MENU]: [
     PANELS.GAMES_LIST,
     PANELS.GAME_RULES,
+    PANELS.RULES_ITEM,
   ],
   [VIEWS.GAME]: [
     PANELS.GAME,

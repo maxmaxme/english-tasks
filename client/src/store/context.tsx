@@ -2,6 +2,7 @@ import { createContext, Dispatch, ReactNode } from 'react';
 import { Action } from './actions';
 import { Panel, PANELS } from '../panels/navigation';
 import { Game, GameId, GameList } from '../shared/types/game';
+import { RuleId, RULES_TYPES, RulesList } from '../shared/types/rules';
 
 export type AppContextType<T> = {
   state: {
@@ -10,6 +11,8 @@ export type AppContextType<T> = {
     games: {[key: GameId]: Game},
     globalError?: string,
     selectedGameId?: GameId,
+    selectedRuleId?: RuleId,
+    rulesList: RulesList,
     popout?: ReactNode,
   }
   dispatch: T,
@@ -17,14 +20,17 @@ export type AppContextType<T> = {
   goBack: () => void,
 };
 
-
 export const AppContextInitialValue = {
   gamesList: [],
   history: [PANELS.GAMES_LIST],
   games: {},
-  globalError: undefined,
-  selectedGameId: undefined,
-  popout: undefined,
+  rulesList: {
+    1: {
+      id: 1,
+      name: 'Транскрипции',
+      type: RULES_TYPES.TRANSCRIPTIONS,
+    },
+  },
 };
 
 export const AppContext = createContext<AppContextType<Dispatch<Action>>>({

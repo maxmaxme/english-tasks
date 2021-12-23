@@ -27,6 +27,11 @@ export const reducer = (state: AppContextType<Dispatch<Action>>['state'], action
       ...state,
       selectedGameId: action.payload,
     };
+  case Actions.SET_SELECTED_RULE_ID:
+    return {
+      ...state,
+      selectedRuleId: action.payload,
+    };
   case Actions.PUSH_HISTORY:
     return {
       ...state,
