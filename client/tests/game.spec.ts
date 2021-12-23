@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-test.describe.parallel('Navigation', () => {
+test.describe.parallel('Game Navigation', () => {
   test('Open & close game rules', async ({ page }) => {
     await page.goto('http://localhost:8080/');
     const firstGame = page.locator('data-test-id=GamesListItem').first();

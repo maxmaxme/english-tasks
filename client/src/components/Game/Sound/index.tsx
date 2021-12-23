@@ -1,13 +1,15 @@
 import { Icon16PlayCircleFillAzure, Icon16PlayCircleFillGray, Icon20PlayCircle, Icon20PlayCircleFillSteelGray } from '@vkontakte/icons';
-import React, { FC, HTMLAttributes, useEffect, useMemo, useState } from 'react';
+import React, { FC, RefObject, useEffect, useMemo, useState } from 'react';
 import styles from './index.css';
+import { Icon16PlayCircleFillAzureProps } from '@vkontakte/icons/dist/16/play_circle_fill_azure';
 
 type Props = {
   url: string;
   size: '16' | '20';
+  itemRef?: RefObject<HTMLDivElement>;
 }
 
-type ComponentType = FC<HTMLAttributes<HTMLDivElement>>;
+type ComponentType = FC<Icon16PlayCircleFillAzureProps>;
 const playIconComponents: { [key: string]: { paused: ComponentType, playing: ComponentType } } = {
   '16': {
     playing: Icon16PlayCircleFillAzure,
@@ -19,7 +21,7 @@ const playIconComponents: { [key: string]: { paused: ComponentType, playing: Com
   },
 };
 
-export const Sound = ({ url, size }: Props) => {
+export const Sound = ({ url, size, itemRef }: Props) => {
   const audio = useMemo(() => new Audio(url), [url]);
   const [playing, setPlaying] = useState(false);
 
@@ -37,5 +39,5 @@ export const Sound = ({ url, size }: Props) => {
   }, [audio]);
 
   const Component = playIconComponents[size][playing ? 'playing' : 'paused'];
-  return <Component className={styles.icon} onClick={toggle} />;
+  return <Component getRootRef={itemRef} className={styles.icon} onClick={toggle} />;
 };

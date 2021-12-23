@@ -36,7 +36,6 @@ const cacheFirst = (event) =>
     .then((cache) => cache.match(event.request))
     .then((cached) => cached || fetch(event.request).then(putToCache(event)));
 
-
 const networkFirst = (event) =>
   fetch(event.request)
     .then(putToCache(event))
