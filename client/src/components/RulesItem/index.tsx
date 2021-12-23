@@ -10,7 +10,7 @@ type Props = {
 export const RulesItem = ({ rule }: Props) => {
   switch (rule.type) {
   case RULES_TYPES.TRANSCRIPTIONS:
-    return <Transcriptions />;
+    return <div data-test-id="RulesItemContent"><Transcriptions /></div>;
   default:
     return <Spinner />;
   }
