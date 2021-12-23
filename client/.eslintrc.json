@@ -26,6 +26,7 @@
     "object-curly-spacing": ["error", "always"],
     "react/jsx-tag-spacing": ["error", {"beforeSelfClosing": "always"}],
     "max-len": ["error", {"code": 180}],
+    "no-multiple-empty-lines": ["error", {"max": 1}],
     "indent": ["error", 2],
     "require-jsdoc": "off",
     "@typescript-eslint/no-empty-function": "off",

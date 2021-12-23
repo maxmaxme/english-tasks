@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import { Game, GameId, GameList } from '../shared/types/game';
 import { Panel } from '../panels/navigation';
 
@@ -16,6 +17,8 @@ export enum Actions {
   PUSH_HISTORY = 'PUSH_HISTORY',
   // eslint-disable-next-line no-unused-vars
   POP_HISTORY = 'POP_HISTORY',
+  // eslint-disable-next-line no-unused-vars
+  SET_POPOUT = 'SET_POPOUT',
 }
 
 export type Action =
@@ -25,5 +28,6 @@ export type Action =
   | { type: Actions.SET_GLOBAL_ERROR, payload: string | undefined }
   | { type: Actions.SET_SELECTED_GAME_ID, payload: GameId | undefined }
   | { type: Actions.PUSH_HISTORY, payload: Panel }
+  | { type: Actions.SET_POPOUT, payload: ReactNode }
   | { type: Actions.POP_HISTORY }
 ;

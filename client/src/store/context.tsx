@@ -1,4 +1,4 @@
-import { createContext, Dispatch } from 'react';
+import { createContext, Dispatch, ReactNode } from 'react';
 import { Action } from './actions';
 import { Panel, PANELS } from '../panels/navigation';
 import { Game, GameId, GameList } from '../shared/types/game';
@@ -8,8 +8,9 @@ export type AppContextType<T> = {
     gamesList: GameList[],
     history: string[],
     games: {[key: GameId]: Game},
-    globalError: undefined | string,
-    selectedGameId: undefined | GameId,
+    globalError?: string,
+    selectedGameId?: GameId,
+    popout?: ReactNode,
   }
   dispatch: T,
   go: (panel: Panel) => void,
@@ -23,6 +24,7 @@ export const AppContextInitialValue = {
   games: {},
   globalError: undefined,
   selectedGameId: undefined,
+  popout: undefined,
 };
 
 export const AppContext = createContext<AppContextType<Dispatch<Action>>>({

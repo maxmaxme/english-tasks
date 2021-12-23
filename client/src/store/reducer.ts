@@ -1,6 +1,6 @@
 import { Dispatch } from 'react';
-import { AppContext as AppContextType } from '../shared/types/context';
 import { Action, Actions } from './actions';
+import { AppContextType } from './context';
 
 export const reducer = (state: AppContextType<Dispatch<Action>>['state'], action: Action): AppContextType<Dispatch<Action>>['state'] => {
   switch (action.type) {
@@ -36,6 +36,11 @@ export const reducer = (state: AppContextType<Dispatch<Action>>['state'], action
     return {
       ...state,
       history: state.history.slice(0, -1),
+    };
+  case Actions.SET_POPOUT:
+    return {
+      ...state,
+      popout: action.payload,
     };
   default:
     // @ts-ignore

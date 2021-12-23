@@ -7,7 +7,6 @@ import { Game as GamePanel } from '../../panels/Game';
 import { Actions } from '../../store/actions';
 import { getFallbackPanelId, getViewByPanelId, Panel, PANELS, View as ViewType, VIEWS } from '../../panels/navigation';
 
-
 export const App = () => {
   const { state: { history }, dispatch, goBack } = useContext(AppContext);
 
