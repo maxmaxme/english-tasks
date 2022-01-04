@@ -1,3 +1,4 @@
+/* eslint-disable */
 const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -5,6 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const getScopedName = require('./src/helpers/getScopedName');
 const Dotenv = require('dotenv-webpack');
 const CopyPlugin = require('copy-webpack-plugin');
+const { GenerateSW } = require('workbox-webpack-plugin');
 
 module.exports = (env, options) => {
   const isDev = options.mode === 'development';
@@ -76,8 +78,10 @@ module.exports = (env, options) => {
       new CopyPlugin({
         patterns: [
           { from: 'src/assets', to: 'assets' },
-          { from: 'src/sw.js', to: 'sw.js' },
         ],
+      }),
+      new GenerateSW({
+        maximumFileSizeToCacheInBytes: isDev ? 100_000_000 : undefined, // 100mb
       }),
     ],
   });

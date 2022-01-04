@@ -4,15 +4,17 @@ import { ApiErrors } from '../shared/types/error';
 export const callApi = (method: string, params: {[key: string]: string | number} = {}) => {
   const cookies = new Cookies();
   const accessToken = cookies.get('access_token');
-  params = {
-    ...params,
-    accessToken,
-  };
+  if (accessToken) {
+    params = {
+      ...params,
+      accessToken,
+    };
+  }
   const urlParams = Object.keys(params).map(function(key) {
     return encodeURIComponent(key) + '=' + encodeURIComponent(params[key]);
   }).join('&');
 
-  return fetch(process.env.API_SERVER + `/api/${method}?${urlParams}`)
+  return fetch(process.env.API_SERVER + `/api/${method}` + (urlParams ? `?${urlParams}` : ''))
     .then((response) => response.json())
     .then((response) => {
       if (response.response) {
