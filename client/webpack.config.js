@@ -74,14 +74,14 @@ module.exports = (env, options) => {
           filename: 'css/[name].[contenthash].css',
           chunkFilename: 'css/[name].[contenthash].css',
         }),
+        new GenerateSW({
+          maximumFileSizeToCacheInBytes: isDev ? 100_000_000 : undefined, // 100mb
+        }),
       ]),
       new CopyPlugin({
         patterns: [
           { from: 'src/assets', to: 'assets' },
         ],
-      }),
-      new GenerateSW({
-        maximumFileSizeToCacheInBytes: isDev ? 100_000_000 : undefined, // 100mb
       }),
     ],
   });
