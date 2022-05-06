@@ -996,7 +996,7 @@ const data = [
   ['magazine', 'журнал'],
   ['bar', 'бар'],
   ['beautiful', 'красиво'],
-  ['property', 'имущетсво'],
+  ['property', 'имущество'],
   ['instead', 'вместо'],
   ['improve', 'улучшать'],
   ['stuff', 'материал'],
