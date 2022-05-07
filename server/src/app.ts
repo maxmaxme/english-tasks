@@ -67,7 +67,7 @@ app.get(subFolder + '/api/*', (req: Request<{ 0?: string }>, res) => {
           response: result,
         });
       })
-      .catch((error: {message: string}) => {
+      .catch((error: { message: string }) => {
         return res.json({
           error: new ApiError(ApiErrors.UNKNOWN_ERROR, error.message).toObject(),
         });
