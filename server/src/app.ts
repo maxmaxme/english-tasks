@@ -16,11 +16,11 @@ dotenv.config({
 });
 
 const app = express();
-const port = process.env.PORT || 3003;
+const port = process.env.PORT || 3002;
 
 const env = process.env.NODE_ENV || 'development';
 const staticPath = env === 'production' ? '../public' : '../client/build';
-const subFolder = env === 'production' ? '/english' : '/api';
+const subFolder = env === 'production' ? '' : '/api';
 app.use(express.static(path.join(__dirname, staticPath)));
 app.use(cors());
 
