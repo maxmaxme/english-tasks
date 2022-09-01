@@ -1,0 +1,9 @@
+{
+  "name": "english",
+  "version": "0.0.1",
+  "scripts": {
+    "start:client": "pnpm --filter client start",
+    "start:server": "pnpm --filter server start"
+  },
+  "packageManager": "pnpm@7.9.5"
+}

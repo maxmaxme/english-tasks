@@ -11,11 +11,14 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [12.x]
+        node-version: [18.x]
     defaults:
       run:
         working-directory: ./server
     steps:
+      - uses: pnpm/action-setup@v2.2.2
+        with:
+          version: 7.9.5
       - uses: actions/checkout@v2
         with:
           fetch-depth: 100
@@ -26,22 +29,25 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm ci
+      - run: pnpm install --frozen-lockfile
       # Build
       - name: Build
-        run: npm run build
+        run: pnpm run build
       - name: ESLint
-        run: npm run eslint
+        run: pnpm run eslint
 
   build-frontend:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [12.x]
+        node-version: [18.x]
     defaults:
       run:
         working-directory: ./client
     steps:
+      - uses: pnpm/action-setup@v2.2.2
+        with:
+          version: 7.9.5
       - uses: actions/checkout@v2
         with:
           fetch-depth: 100
@@ -52,9 +58,9 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm ci
+      - run: pnpm install --frozen-lockfile
       # Build
       - name: Build
-        run: npm run build
+        run: pnpm run build
       - name: ESLint
-        run: npm run eslint
+        run: pnpm run eslint
